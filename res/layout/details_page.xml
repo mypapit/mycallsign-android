@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#eeeeee"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/top_details_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/details_gradient"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip" >
+        
+         <ImageView
+            android:id="@+id/no_image"
+            android:layout_width="96dip"
+            android:layout_height="96dip"
+            android:src="@drawable/no_image"/>
+ <TextView 
+     android:id="@+id/csdetails"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_toRightOf="@+id/no_image"
+     android:layout_alignTop="@+id/no_image"
+     android:paddingLeft="8dip"
+     android:textColor="#222222"
+     android:typeface="sans"
+     android:textSize="32dip" 
+     android:text="9W2WTF"
+     
+     />
+ 
+ <TextView
+     android:id="@+id/handledetails"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_below="@+id/csdetails"
+     android:layout_toRightOf="@+id/no_image"
+     android:paddingLeft="8dip"
+     android:text="Mohammad Hafiz bin Ismail"
+     android:textColor="#333333"
+     android:textSize="16dip"
+     />
+    
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/bottom_details_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/top_details_layout"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="12dip" 
+
+        >
+      <!--    android:background="@drawable/details_outline"-->
+        <TextView
+            android:id="@+id/subtitleAA"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Apparatus Assignment"
+            android:textSize="16dip"
+            android:textStyle="bold" 
+            android:background="@drawable/details_header"
+            />
+
+        <TextView
+            android:id="@+id/AA"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dip"
+            android:layout_below="@+id/subtitleAA"
+            android:layout_centerVertical="true"
+            android:text="000021028181/2121022321" 
+            android:paddingBottom="12dip"
+            android:background="#ffffff"
+            />
+
+        <TextView
+            android:id="@+id/subtitleExpiry"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/AA"
+            android:text="Expiry Date"
+            android:textSize="16dip"
+            android:textStyle="bold"
+            android:background="@drawable/details_header"
+             />
+
+        <TextView
+            android:id="@+id/Expiry"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/subtitleExpiry"
+            android:paddingBottom="10dip"
+            android:paddingLeft="20dip"
+            android:text="2013-12-08" 
+            android:background="#ffffff"
+            />
+        
+    </RelativeLayout>
+
+</LinearLayout>
