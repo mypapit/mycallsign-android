@@ -40,6 +40,11 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class CallsignDetailActivity extends Activity {
@@ -66,6 +71,15 @@ public class CallsignDetailActivity extends Activity {
         
         
         getWindow().setFeatureDrawableResource(Window.FEATURE_LEFT_ICON,R.drawable.ic_smallicon);
+        
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.slide_up);
+        //BounceInterpolator bi = new BounceInterpolator();
+       // bi.getInterpolation(2.0f);
+        //animation.setInterpolator(bi);
+        //animation.setInterpolator(new DecelerateInterpolator(2.0f));
+        
+        LinearLayout mainLayout = (LinearLayout)this.findViewById(R.id.details_page_layout);
+        mainLayout.startAnimation(animation);
         
         
         

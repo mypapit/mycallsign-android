@@ -57,6 +57,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.AnimationUtils;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.ScaleAnimation;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AlphabetIndexer;
@@ -198,27 +203,64 @@ public class CallsignViewActivity extends Activity implements TextWatcher,Runnab
         
         lvCallsign.setOnItemClickListener(new OnItemClickListener() {
         	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+        		//Animation animation = new ScaleAnimation(1,1,1,0);
+        		final int lvposition = position;
         		
-        		Intent passIntent = new Intent();
-        		passIntent.setClassName("net.mypapit.mobile.callsignview", "net.mypapit.mobile.callsignview.CallsignDetailActivity");
+        		Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.csfade);
         		
-        		Cursor cursor1 =(Cursor) lvCallsign.getItemAtPosition(position);
+        		 BounceInterpolator bi = new BounceInterpolator();
+        	     //bi.getInterpolation(2.0f);
+        	     animation.setInterpolator(bi);
         		
-        		String strCallsign = cursor1.getString(cursor1.getColumnIndex("callsign"));
+        		animation.setAnimationListener(new AnimationListener() {
+
+					@Override
+					public void onAnimationEnd(Animation animation) {
+						// TODO Auto-generated method stub
+						Intent passIntent = new Intent();
+		        		passIntent.setClassName("net.mypapit.mobile.callsignview", "net.mypapit.mobile.callsignview.CallsignDetailActivity");
+		        		
+		        		Cursor cursor1 =(Cursor) lvCallsign.getItemAtPosition(lvposition);
+		        		
+		        		String strCallsign = cursor1.getString(cursor1.getColumnIndex("callsign"));
+		        		
+		        		
+		        		cursor=db.rawQuery("SELECT _id,callsign,handle,aa,expire FROM aa WHERE callsign LIKE ? ORDER BY handle" , new String[]{"%" + strCallsign +"%"});
+		        		
+		        		cursor.moveToFirst();
+		        		
+		        		CallsignInfo csinfo = new CallsignInfo();
+		        		csinfo.callsign = cursor.getString(cursor.getColumnIndex("callsign"));
+		        		csinfo.handle = cursor.getString(cursor.getColumnIndex("handle"));
+		        		csinfo.aa = cursor.getString(cursor.getColumnIndex("aa"));
+		        		csinfo.expire = cursor.getString(cursor.getColumnIndex("expire"));
+		        		
+		        		passIntent.putExtra("CallsignInfo", csinfo);
+		        		startActivityForResult(passIntent,-1);
+						
+					}
+
+					@Override
+					public void onAnimationRepeat(Animation animation) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void onAnimationStart(Animation animation) {
+						// TODO Auto-generated method stub
+						
+					}
+        			
+        		});
+        		
+        		animation.setDuration(200);
+        		 view.startAnimation(animation);
+        		 
         		
         		
-        		cursor=db.rawQuery("SELECT _id,callsign,handle,aa,expire FROM aa WHERE callsign LIKE ? ORDER BY handle" , new String[]{"%" + strCallsign +"%"});
-        		
-        		cursor.moveToFirst();
-        		
-        		CallsignInfo csinfo = new CallsignInfo();
-        		csinfo.callsign = cursor.getString(cursor.getColumnIndex("callsign"));
-        		csinfo.handle = cursor.getString(cursor.getColumnIndex("handle"));
-        		csinfo.aa = cursor.getString(cursor.getColumnIndex("aa"));
-        		csinfo.expire = cursor.getString(cursor.getColumnIndex("expire"));
-        		
-        		passIntent.putExtra("CallsignInfo", csinfo);
-        		startActivityForResult(passIntent,-1);
+        		//original intent
+        		 
         		
         		
         	}
@@ -312,7 +354,7 @@ public class CallsignViewActivity extends Activity implements TextWatcher,Runnab
 
 		}
 
-		adapter = new MyCursorAdapter(cva, R.layout.callsign_layout, cursor, new String[] {"callsign","handle"}, new int[] {R.id.callsign,R.id.handle});
+		adapter = new MyCursorAdapter(this, R.layout.callsign_layout, cursor, new String[] {"callsign","handle"}, new int[] {R.id.callsign,R.id.handle});
 		lvCallsign.setAdapter(adapter);
 
 
@@ -342,7 +384,7 @@ public class CallsignViewActivity extends Activity implements TextWatcher,Runnab
     		try {
     		showDialog();
     		} catch (NameNotFoundException ex){
-    			Toast toast = Toast.makeText(cva, ex.toString(), Toast.LENGTH_SHORT);
+    			Toast toast = Toast.makeText(this, ex.toString(), Toast.LENGTH_SHORT);
     			toast.show();
     			
     		
@@ -426,10 +468,14 @@ public class CallsignViewActivity extends Activity implements TextWatcher,Runnab
         cursor = db.query("aa", new String[]{"_id","callsign","handle"}, null, null, null, null, "handle");
         defaultcursor = cursor;
         
-        cva.runOnUiThread(new Runnable() { 
-        	
+        
+        this.runOnUiThread(new Runnable() {
+/*        cva.runOnUiThread(new Runnable() { */
+        
+
+
         	public void run() {
-        		 adapter = new MyCursorAdapter(cva, R.layout.callsign_layout, cursor, new String[] {"callsign","handle"}, new int[] {R.id.callsign,R.id.handle});
+        		 adapter = new MyCursorAdapter(getApplicationContext(), R.layout.callsign_layout, cursor, new String[] {"callsign","handle"}, new int[] {R.id.callsign,R.id.handle});
     			 
         			lvCallsign.setAdapter(adapter);
         			lvCallsign.setFastScrollEnabled(true);
