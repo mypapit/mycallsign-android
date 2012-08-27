@@ -204,19 +204,25 @@ public class CallsignViewActivity extends Activity implements TextWatcher,Runnab
         lvCallsign.setOnItemClickListener(new OnItemClickListener() {
         	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
         		//Animation animation = new ScaleAnimation(1,1,1,0);
+        		final View clickedView = view;
         		final int lvposition = position;
         		
         		Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.csfade);
         		
-        		 BounceInterpolator bi = new BounceInterpolator();
+        		 //BounceInterpolator bi = new BounceInterpolator();
         	     //bi.getInterpolation(2.0f);
-        	     animation.setInterpolator(bi);
+        	     //animation.setInterpolator(bi);
         		
         		animation.setAnimationListener(new AnimationListener() {
 
 					@Override
 					public void onAnimationEnd(Animation animation) {
-						// TODO Auto-generated method stub
+						//clickedView.setVisibility(View.INVISIBLE);
+						
+						
+						
+						
+						
 						Intent passIntent = new Intent();
 		        		passIntent.setClassName("net.mypapit.mobile.callsignview", "net.mypapit.mobile.callsignview.CallsignDetailActivity");
 		        		
@@ -254,7 +260,7 @@ public class CallsignViewActivity extends Activity implements TextWatcher,Runnab
         			
         		});
         		
-        		animation.setDuration(200);
+        		animation.setDuration(180);
         		 view.startAnimation(animation);
         		 
         		
