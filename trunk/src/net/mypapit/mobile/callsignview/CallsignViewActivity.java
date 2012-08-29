@@ -75,6 +75,8 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.woozzu.android.util.StringMatcher;
+import com.woozzu.android.widget.IndexableListView;
 
 public class CallsignViewActivity extends Activity implements TextWatcher,Runnable {
     /** Called when the activity is first created. */
@@ -85,10 +87,12 @@ public class CallsignViewActivity extends Activity implements TextWatcher,Runnab
 	public static int strDBVERSION=5;
 	
 	
-	public EditText searchText;
+	public ClearableEditText searchText;
+	//public EditText searchText;
 	public Cursor cursor,defaultcursor;
 	public ListAdapter adapter;
-	public ListView lvCallsign;
+	//public ListView lvCallsign;
+	public IndexableListView lvCallsign;
 	private Spinner spinPrefix;
 	
 	CallsignViewActivity cva;
@@ -100,8 +104,10 @@ public class CallsignViewActivity extends Activity implements TextWatcher,Runnab
         
         requestWindowFeature(Window.FEATURE_LEFT_ICON);
         setContentView(R.layout.main);
+        
         getWindow().setFeatureDrawableResource(Window.FEATURE_LEFT_ICON,R.drawable.ic_smallicon);
         
+        //searchText = new EditText(this);
         
         Log.w("alive and well","i'm alive");
         
@@ -118,11 +124,19 @@ public class CallsignViewActivity extends Activity implements TextWatcher,Runnab
 
 
         
-        lvCallsign = (ListView) findViewById(R.id.lvCallsignView);
-        searchText = (EditText) findViewById (R.id.etCallsignFilter);
+        lvCallsign = (IndexableListView) findViewById(R.id.lvCallsignView);
+        searchText = (ClearableEditText) findViewById (R.id.etCallsignFilter);
+       
         
         spinPrefix = (Spinner) findViewById(R.id.spinPrefix);
         this.fillSpinner();
+
+        if (spinPrefix.getSelectedItem().toString().equals("Name")){ 
+        	searchText.setHint("Enter Name");
+        } else {
+        	searchText.setHint("Enter Callsign");
+        }
+
         
       //get save preferences
         SharedPreferences prefs=getPreferences(Context.MODE_PRIVATE);
@@ -543,32 +557,54 @@ public class CallsignViewActivity extends Activity implements TextWatcher,Runnab
 	// MyCursorAdapter: inner-class to ease up fast-search indexing 
 	//
 	class MyCursorAdapter extends SimpleCursorAdapter implements SectionIndexer {
-		AlphabetIndexer alphaIndexer;
-		
+		//AlphabetIndexer alphaIndexer;
+		private String mSections = "#ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		public MyCursorAdapter(Context context, int layout, Cursor c, String[] from, int[] to) {
 			super(context, layout,c,from,to);
 			
-			alphaIndexer = new AlphabetIndexer(c,cursor.getColumnIndex("handle")," ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+			//alphaIndexer = new AlphabetIndexer(c,cursor.getColumnIndex("handle")," ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 			
 			
 			
 		}
 		
 		public int getPositionForSection(int section) {
-			return alphaIndexer.getPositionForSection(section);
+			//return alphaIndexer.getPositionForSection(section);
+			// If there is no item for current section, previous section will be selected
+			for (int i = section; i >= 0; i--) {
+				for (int j = 0; j < getCount(); j++) {
+					if (i == 0) {
+						// For numeric section
+						for (int k = 0; k <= 9; k++) {
+							if (StringMatcher.match(String.valueOf( ((Cursor) getItem(j)).getString(2).charAt(0)), String.valueOf(k)))
+								return j;
+							
+						}
+					} else {
+						if (StringMatcher.match(String.valueOf( ((Cursor) getItem(j)).getString(2).charAt(0)), String.valueOf(mSections.charAt(i))))
+							return j;
+					}
+				}
+			}
+			return 0;
+
 			
 		
 		}
 		
 		public int getSectionForPosition(int position){
-			return alphaIndexer.getSectionForPosition(position);
+			//return alphaIndexer.getSectionForPosition(position);
+			return 0;
 			
 			
 		}
 		
 		public Object[] getSections() {
 			
-			return alphaIndexer.getSections();
+			String[] sections = new String[mSections.length()];
+			for (int i = 0; i < mSections.length(); i++)
+				sections[i] = String.valueOf(mSections.charAt(i));
+			return sections;
 		}
 			
 	
