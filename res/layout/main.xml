@@ -16,19 +16,19 @@
             android:prompt="@string/csprefixprompt"
             />
 
-        <EditText
+        <net.mypapit.mobile.callsignview.ClearableEditText
             android:id="@+id/etCallsignFilter"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+                  android:layout_height="wrap_content"
+              android:layout_toRightOf="@+id/spinPrefix"
             
-            android:hint="Enter Callsign"
-            android:layout_alignBaseline="@+id/spinPrefix"
-            android:layout_toRightOf="@+id/spinPrefix"
-            android:inputType="textEmailAddress" />
+            
+            
+       />
 
     </RelativeLayout>
 
-    <ListView
+    <com.woozzu.android.widget.IndexableListView
         android:id="@+id/lvCallsignView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
@@ -41,6 +41,6 @@
         
         >
 
-    </ListView>
+    </com.woozzu.android.widget.IndexableListView>
 
 </LinearLayout>
