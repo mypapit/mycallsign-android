@@ -1,0 +1,32 @@
+
+--This line, and those below, will be ignored--
+
+A    .classpath
+A    .project
+A    bin
+A    bin/res
+A    bin/res/drawable
+AM   bin/res/drawable/ic_smallicon.png
+A    bin/res/drawable-hdpi
+AM   bin/res/drawable-hdpi/ic_launcher.png
+AM   bin/res/drawable-hdpi/ic_action_search.png
+AM   bin/res/drawable-hdpi/no_image.png
+A    bin/res/drawable-ldpi
+AM   bin/res/drawable-ldpi/ic_launcher.png
+A    bin/res/drawable-mdpi
+AM   bin/res/drawable-mdpi/ic_launcher.png
+AM   bin/res/drawable-mdpi/ic_action_search.png
+A    bin/res/drawable-xhdpi
+AM   bin/res/drawable-xhdpi/ic_action_search.png
+AM   bin/res/drawable-xhdpi/no_image.png
+AM   bin/res/drawable-xhdpi/ic_launcher.png
+A    bin/jarlist.cache
+AM   bin/classes.dex
+AM   res/drawable-xhdpi/no_image.png
+A    gen
+A    gen/net
+A    gen/net/mypapit
+A    gen/net/mypapit/mobile
+A    gen/net/mypapit/mobile/callsignview
+A    gen/net/mypapit/mobile/callsignview/R.java
+A    gen/net/mypapit/mobile/callsignview/BuildConfig.java
