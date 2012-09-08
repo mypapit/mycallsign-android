@@ -56,6 +56,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
@@ -78,7 +79,7 @@ import android.widget.Toast;
 import com.woozzu.android.util.StringMatcher;
 import com.woozzu.android.widget.IndexableListView;
 
-public class CallsignViewActivity extends Activity implements TextWatcher,Runnable {
+public class CallsignViewActivity extends CustomWindow implements TextWatcher,Runnable,OnClickListener {
     /** Called when the activity is first created. */
 	private Dialog progressDialog;	
 	
@@ -102,15 +103,19 @@ public class CallsignViewActivity extends Activity implements TextWatcher,Runnab
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        requestWindowFeature(Window.FEATURE_LEFT_ICON);
+        //requestWindowFeature(Window.FEATURE_LEFT_ICON);
         setContentView(R.layout.main);
         
-        getWindow().setFeatureDrawableResource(Window.FEATURE_LEFT_ICON,R.drawable.ic_smallicon);
+        //getWindow().setFeatureDrawableResource(Window.FEATURE_LEFT_ICON,R.drawable.ic_smallicon);
+        
+        
         
         //searchText = new EditText(this);
         
         Log.w("alive and well","i'm alive");
         
+        this.btnAbout.setOnClickListener(this);
+        this.icon.setOnClickListener(this);
         
         //show progress dialog while application is populating the database for the first time.
         this.showProgress();
@@ -385,10 +390,10 @@ public class CallsignViewActivity extends Activity implements TextWatcher,Runnab
 	
 	
 	public boolean onCreateOptionsMenu(Menu menu) {
-    	super.onCreateOptionsMenu(menu);
+    	//super.onCreateOptionsMenu(menu);
     	
-    	MenuInflater inflater = getMenuInflater();
-    	inflater.inflate(R.menu.list_menu, menu);
+    	//MenuInflater inflater = getMenuInflater();
+    	//inflater.inflate(R.menu.list_menu, menu);
     	
     	
 
@@ -610,6 +615,43 @@ public class CallsignViewActivity extends Activity implements TextWatcher,Runnab
 	
 	
 	} // end MyCursorAdapter inner-class
+
+
+	@Override
+	public void onClick(View view) {
+		// TODO Auto-generated method stub
+		switch (view.getId()) {
+		 
+		case R.id.btnAbout:
+    		try {
+    		showDialog();
+    		} catch (NameNotFoundException ex){
+    			Toast toast = Toast.makeText(this, ex.toString(), Toast.LENGTH_SHORT);
+    			toast.show();
+    			
+    		
+    		}
+			
+		break;
+		case R.id.btnIcon:
+    		Intent urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + this.getPackageName()));
+    		
+    		try {
+    			startActivity(urlIntent);
+    			
+    			
+    		} catch (ActivityNotFoundException anfe){
+    			Toast.makeText(this, "Couldn't launch Google Play store", Toast.LENGTH_LONG).show();
+    		}
+    		
+			
+		break;
+		
+		
+		}
+		
+		
+	}
 	
 	
 
