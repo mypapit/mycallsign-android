@@ -169,7 +169,7 @@ public class CallsignDetailActivity extends CustomWindow implements OnClickListe
     		sharingIntent.setType("text/plain");
     		sharingIntent.putExtra(android.content.Intent.EXTRA_TITLE, "Callsign info");
     		sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "MyCallsign Data");
-    		sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Callsign: " + csinfo.callsign + "\nHandle: "+csinfo.handle+"\nAA: "+ csinfo.aa +"\nExpiry: " + csinfo.expire +"\n\n http://callsign.ashamradio.com/mycallsign.php?mycallsign="+csinfo.callsign);
+    		sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, csinfo.callsign + "\nHandle: "+csinfo.handle+"\nAA: "+ csinfo.aa +"\nExpiry: " + csinfo.expire +"\n\n http://callsign.ashamradio.com/mycallsign.php?mycallsign="+csinfo.callsign);
     		//sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, "http://callsign.ashamradio.com/mycallsign.php?mycallsign="+csinfo.callsign);
     		startActivity(Intent.createChooser(sharingIntent, "Share via"));
     		

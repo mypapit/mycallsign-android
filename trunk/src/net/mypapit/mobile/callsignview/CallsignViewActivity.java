@@ -85,7 +85,7 @@ public class CallsignViewActivity extends CustomWindow implements TextWatcher,Ru
 	
 	public ConstantsInstaller placeData;
 	public SQLiteDatabase db;
-	public static int strDBVERSION=5;
+	public static int strDBVERSION=6;
 	
 	
 	public ClearableEditText searchText;
@@ -250,7 +250,7 @@ public class CallsignViewActivity extends CustomWindow implements TextWatcher,Ru
 		        		String strCallsign = cursor1.getString(cursor1.getColumnIndex("callsign"));
 		        		
 		        		
-		        		cursor=db.rawQuery("SELECT _id,callsign,handle,aa,expire FROM aa WHERE callsign LIKE ? ORDER BY handle" , new String[]{"%" + strCallsign +"%"});
+		        		cursor=db.rawQuery("SELECT _id,callsign,handle,aa,expire FROM aa WHERE callsign LIKE ? ORDER BY handle" , new String[]{"%" + strCallsign});
 		        		
 		        		cursor.moveToFirst();
 		        		
