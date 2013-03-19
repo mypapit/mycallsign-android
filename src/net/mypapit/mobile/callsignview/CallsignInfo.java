@@ -41,7 +41,7 @@ public class CallsignInfo implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 5527936939732596038L;
+	private static final long serialVersionUID = 5527936939732596098L;
 	public String callsign,aa,handle,expire;
 	
 	

@@ -2,11 +2,11 @@ package com.woozzu.android.util;
 
 public class StringMatcher {
 	
-	private final static char KOREAN_UNICODE_START = '가';
-	private final static char KOREAN_UNICODE_END = '힣';
-	private final static char KOREAN_UNIT = '까' - '가';
-	private final static char[] KOREAN_INITIAL = {'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ'
-		, 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'};
+	private final static char KOREAN_UNICODE_START = 'x';
+	private final static char KOREAN_UNICODE_END = 'x';
+	private final static char KOREAN_UNIT = 'x';
+	private final static char[] KOREAN_INITIAL = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'
+		, 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's'};
 	
 	public static boolean match(String value, String keyword) {
 		if (value == null || keyword == null)
