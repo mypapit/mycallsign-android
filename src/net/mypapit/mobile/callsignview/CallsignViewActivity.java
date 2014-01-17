@@ -61,16 +61,15 @@ import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
-import android.view.animation.BounceInterpolator;
-import android.view.animation.ScaleAnimation;
+
+
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AlphabetIndexer;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
+
 import android.widget.ImageView;
 import android.widget.ListAdapter;
-import android.widget.ListView;
+
 import android.widget.SectionIndexer;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
@@ -85,7 +84,7 @@ public class CallsignViewActivity extends CustomWindow implements TextWatcher,Ru
 	
 	public ConstantsInstaller placeData;
 	public SQLiteDatabase db;
-	public static int strDBVERSION=6;
+	public static int strDBVERSION=0xa;
 	
 	
 	public ClearableEditText searchText;
@@ -483,7 +482,7 @@ public class CallsignViewActivity extends CustomWindow implements TextWatcher,Ru
 	public void run() {
 		// TODO Auto-generated method stub
 		if (placeData == null||db==null|| !db.isOpen()){
-			placeData = new ConstantsInstaller(this,"callsign.db",null,this.strDBVERSION,R.raw.callsign);
+			placeData = new ConstantsInstaller(this,"callsign.db",null,CallsignViewActivity.strDBVERSION,R.raw.callsign);
 			db = placeData.getWritableDatabase();
 		}
         
