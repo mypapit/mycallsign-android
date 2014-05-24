@@ -1,4 +1,5 @@
 package net.mypapit.mobile.callsignview;
+
 /*
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 2 as
@@ -13,8 +14,8 @@ package net.mypapit.mobile.callsignview;
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * MYCallsign 1.0 for Android <mypapit@gmail.com> (9w2wtf)
- * Copyright 2012 Mohammad Hafiz bin Ismail. All rights reserved.
+ * MYCallsign 1.6.1 for Android <mypapit@gmail.com> (9w2wtf)
+ * Copyright 2012, 2014 Mohammad Hafiz bin Ismail. All rights reserved.
  *
  * Info url :
  * http://code.google.com/p/mycallsign-android/
@@ -37,79 +38,65 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-
 //import android.app.ProgressDialog;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+public abstract class DatabaseInstaller extends SQLiteOpenHelper implements
+		Runnable {
 
-public abstract class DatabaseInstaller extends SQLiteOpenHelper implements Runnable {
-
-	
-	private CallsignViewActivity ctxt=null;
+	private CallsignViewActivity ctxt = null;
 	private int resource;
 	SQLiteDatabase database;
-	
-	
-	
-	public DatabaseInstaller(CallsignViewActivity context, String name, SQLiteDatabase.CursorFactory factory, int version, int resource){
-		super(context,name,factory,version);
-		
+
+	public DatabaseInstaller(CallsignViewActivity context, String name,
+			SQLiteDatabase.CursorFactory factory, int version, int resource) {
+		super(context, name, factory, version);
+
 		this.resource = resource;
-		
-		this.ctxt=context;
-		
-		
+
+		this.ctxt = context;
+
 	}
-	
-	public void onCreate(SQLiteDatabase db){
-		
-		//pd = ProgressDialog.show(ctxt, "Please wait...", "Importing database",false,true);
-		
-		//Thread thread = new Thread(this);
-		//thread.start();
-			
-		
+
+	public void onCreate(SQLiteDatabase db) {
+
+		// pd = ProgressDialog.show(ctxt, "Please wait...",
+		// "Importing database",false,true);
+
+		// Thread thread = new Thread(this);
+		// thread.start();
+
 		database = db;
 		try {
 			InputStream stream = ctxt.getResources().openRawResource(resource);
 			InputStreamReader is = new InputStreamReader(stream);
-			BufferedReader in =new BufferedReader(is);
+			BufferedReader in = new BufferedReader(is);
 			String str;
-			//ctxt.showProgress();	
-			while ((str=in.readLine()) != null) {
-				//Log.i("SQL DatabaseInstaller",str);
+			// ctxt.showProgress();
+			while ((str = in.readLine()) != null) {
+				// Log.i("SQL DatabaseInstaller",str);
 				database.execSQL(str);
-				
-				
+
 			}
-			
+
 			in.close();
-			//ctxt.hideProgress();
-			//pd.dismiss();
-			
-			
-			
-		} catch ( IOException e) {
-			Log.d(this.toString(),"error while installing callsign db: " + e,e);
-			//pd.dismiss();
+			// ctxt.hideProgress();
+			// pd.dismiss();
+
+		} catch (IOException e) {
+			Log.d(this.toString(), "error while installing callsign db: " + e,
+					e);
+			// pd.dismiss();
 		} finally {
-			
-			
+
 		}
-		
-		
-		
-		
-		
-		
+
 	}
-	
+
 	public void run() {
 
 	}
-	
-	
-	
+
 }

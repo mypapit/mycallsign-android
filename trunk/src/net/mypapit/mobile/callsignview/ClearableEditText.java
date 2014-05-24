@@ -1,3 +1,8 @@
+/*
+ * The source code for ClearableEditText.java is in the public domain.  You are free to use it
+ * in any manner you wish.
+ *
+ */
 package net.mypapit.mobile.callsignview;
 
 import android.content.Context;
