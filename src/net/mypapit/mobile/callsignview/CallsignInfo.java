@@ -1,4 +1,5 @@
 package net.mypapit.mobile.callsignview;
+
 /*
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 2 as
@@ -13,8 +14,8 @@ package net.mypapit.mobile.callsignview;
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * MYCallsign 1.0 for Android <mypapit@gmail.com> (9w2wtf)
- * Copyright 2012 Mohammad Hafiz bin Ismail. All rights reserved.
+ * MYCallsign 1.6.1 for Android <mypapit@gmail.com> (9w2wtf)
+ * Copyright 2012, 2014 Mohammad Hafiz bin Ismail. All rights reserved.
  *
  * Info url :
  * http://code.google.com/p/mycallsign-android/
@@ -35,15 +36,12 @@ package net.mypapit.mobile.callsignview;
 
 import java.io.Serializable;
 
-
 public class CallsignInfo implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 5527936939732596098L;
-	public String callsign,aa,handle,expire;
-	
-	
-	
+	public String callsign, aa, handle, expire;
+
 }
