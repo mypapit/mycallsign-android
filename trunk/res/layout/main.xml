@@ -2,12 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
-
-    <RelativeLayout
+    android:orientation="vertical">
+    
+
+
+   <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" >
-
+
         <Spinner
             android:id="@+id/spinPrefix"
             android:layout_width="wrap_content"
@@ -15,7 +17,7 @@
             
             android:prompt="@string/csprefixprompt"
             />
-
+
         <net.mypapit.mobile.callsignview.ClearableEditText
             android:id="@+id/etCallsignFilter"
             android:layout_width="fill_parent"
@@ -27,7 +29,7 @@
        />
 
     </RelativeLayout>
-
+
     <com.woozzu.android.widget.IndexableListView
         android:id="@+id/lvCallsignView"
         android:layout_width="fill_parent"

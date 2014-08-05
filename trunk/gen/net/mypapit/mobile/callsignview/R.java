@@ -39,37 +39,35 @@ public final class R {
         public static final int sharebutton=0x7f020015;
     }
     public static final class id {
-        public static final int AA=0x7f09000e;
-        public static final int Expiry=0x7f090010;
-        public static final int bottom_details_layout=0x7f09000c;
-        public static final int btnAbout=0x7f090019;
-        public static final int btnIcon=0x7f09001a;
-        public static final int callsign=0x7f090003;
-        public static final int clearable_button_clear=0x7f090006;
-        public static final int clearable_edit=0x7f090005;
-        public static final int csdetails=0x7f09000a;
-        public static final int csprefix=0x7f090016;
-        public static final int details_page_layout=0x7f090007;
-        public static final int etCallsignFilter=0x7f090012;
-        public static final int handle=0x7f090004;
-        public static final int handledetails=0x7f09000b;
-        public static final int imageView1=0x7f090017;
-        public static final int itemAbout=0x7f09001d;
-        public static final int itemRate=0x7f09001e;
-        public static final int itemShare=0x7f09001c;
-        public static final int ivAbout=0x7f090000;
-        public static final int lvCallsignView=0x7f090013;
-        public static final int no_image=0x7f090009;
-        public static final int progressBar1=0x7f090015;
-        public static final int sharebutton=0x7f09001b;
-        public static final int spinPrefix=0x7f090011;
-        public static final int subtitleAA=0x7f09000d;
-        public static final int subtitleExpiry=0x7f09000f;
-        public static final int svAbout=0x7f090001;
-        public static final int textView1=0x7f090014;
-        public static final int top_details_layout=0x7f090008;
-        public static final int tvAbout=0x7f090002;
-        public static final int windowTitle=0x7f090018;
+        public static final int AA=0x7f08000e;
+        public static final int Expiry=0x7f080010;
+        public static final int bottom_details_layout=0x7f08000c;
+        public static final int btnAbout=0x7f08001a;
+        public static final int btnIcon=0x7f08001b;
+        public static final int callsign=0x7f080003;
+        public static final int clearable_button_clear=0x7f080006;
+        public static final int clearable_edit=0x7f080005;
+        public static final int csdetails=0x7f08000a;
+        public static final int csprefix=0x7f080017;
+        public static final int details_page_layout=0x7f080007;
+        public static final int etCallsignFilter=0x7f080012;
+        public static final int handle=0x7f080004;
+        public static final int handledetails=0x7f08000b;
+        public static final int imageView1=0x7f080018;
+        public static final int ivAbout=0x7f080000;
+        public static final int lvCallsignView=0x7f080013;
+        public static final int no_image=0x7f080009;
+        public static final int progressBar1=0x7f080016;
+        public static final int sharebutton=0x7f08001c;
+        public static final int spinPrefix=0x7f080011;
+        public static final int subtitleAA=0x7f08000d;
+        public static final int subtitleExpiry=0x7f08000f;
+        public static final int svAbout=0x7f080001;
+        public static final int textView1=0x7f080014;
+        public static final int textView2=0x7f080015;
+        public static final int top_details_layout=0x7f080008;
+        public static final int tvAbout=0x7f080002;
+        public static final int windowTitle=0x7f080019;
     }
     public static final class layout {
         public static final int about_dialog=0x7f030000;
@@ -80,10 +78,6 @@ public final class R {
         public static final int progress_dialog=0x7f030005;
         public static final int spinner_item_x=0x7f030006;
         public static final int window_title=0x7f030007;
-    }
-    public static final class menu {
-        public static final int activity_callsign_detail=0x7f080000;
-        public static final int list_menu=0x7f080001;
     }
     public static final class raw {
         public static final int callsign=0x7f050000;

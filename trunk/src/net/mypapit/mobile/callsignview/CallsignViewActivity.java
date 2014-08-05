@@ -84,7 +84,7 @@ public class CallsignViewActivity extends CustomWindow implements TextWatcher,
 	public SQLiteDatabase db;
 	
 	//please increment strDBVERSION when callsign.txt is updated
-	public static int strDBVERSION = 0xd; 
+	public static int strDBVERSION = 0xe; 
 
 	public ClearableEditText searchText;
 	public Cursor cursor, defaultcursor;
