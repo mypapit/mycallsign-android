@@ -21,4 +21,4 @@
 
 -optimizationpasses 6
 -dontusemixedcaseclassnames
--dontskipnonpubliclibraryclasses
+
