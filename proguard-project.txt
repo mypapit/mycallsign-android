@@ -19,6 +19,18 @@
 #   public *;
 #}
 
+-keep class com.google.android.gms.maps.** { *; }
 -optimizationpasses 6
 -dontusemixedcaseclassnames
+-dontskipnonpubliclibraryclasses
 
+#-keep public class com.google.android.gms.maps.CameraUpdateFactory 
+#-keep public class com.google.android.gms.maps.GoogleMap.OnMarkerClickListener
+#-keep public class com.google.android.gms.maps.SupportMapFragment 
+#-keep public class com.google.android.gms.maps.model.LatLng 
+#-keep public class com.google.android.gms.maps.model.Marker 
+#-keep public class com.google.android.gms.maps.model.MarkerOptions
+
+-keep interface com.google.android.gms.maps.** { *; }
+
+-dontwarn com.google.android.gms.**
