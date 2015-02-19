@@ -1,0 +1,140 @@
+android.support.v4.app.BackStackState
+android.support.v4.app.BackStackState: android.os.Parcelable$Creator CREATOR
+android.support.v4.app.Fragment$SavedState
+android.support.v4.app.Fragment$SavedState: android.os.Parcelable$Creator CREATOR
+android.support.v4.app.FragmentManagerState
+android.support.v4.app.FragmentManagerState: android.os.Parcelable$Creator CREATOR
+android.support.v4.app.FragmentState
+android.support.v4.app.FragmentState: android.os.Parcelable$Creator CREATOR
+android.support.v4.content.ModernAsyncTask$Status: android.support.v4.content.ModernAsyncTask$Status[] values()
+android.support.v4.content.ModernAsyncTask$Status: android.support.v4.content.ModernAsyncTask$Status valueOf(java.lang.String)
+android.support.v4.view.PagerTabStrip: void setTabIndicatorColor(int)
+android.support.v4.view.PagerTabStrip: void setTabIndicatorColorResource(int)
+android.support.v4.view.PagerTabStrip: int getTabIndicatorColor()
+android.support.v4.view.PagerTabStrip: void setTextSpacing(int)
+android.support.v4.view.PagerTabStrip: void setBackgroundDrawable(android.graphics.drawable.Drawable)
+android.support.v4.view.PagerTabStrip: void setBackgroundColor(int)
+android.support.v4.view.PagerTabStrip: void setBackgroundResource(int)
+android.support.v4.view.PagerTabStrip: void setDrawFullUnderline(boolean)
+android.support.v4.view.PagerTabStrip: boolean getDrawFullUnderline()
+android.support.v4.view.PagerTabStrip: int getMinHeight()
+android.support.v4.view.PagerTitleStrip: void setSingleLineAllCaps(android.widget.TextView)
+android.support.v4.view.PagerTitleStrip: void setTextSpacing(int)
+android.support.v4.view.PagerTitleStrip: int getTextSpacing()
+android.support.v4.view.PagerTitleStrip: void setNonPrimaryAlpha(float)
+android.support.v4.view.PagerTitleStrip: void setTextColor(int)
+android.support.v4.view.PagerTitleStrip: void setGravity(int)
+android.support.v4.view.PagerTitleStrip: int getMinHeight()
+android.support.v4.view.ViewPager: void setScrollState(int)
+android.support.v4.view.ViewPager: void setAdapter(android.support.v4.view.PagerAdapter)
+android.support.v4.view.ViewPager: android.support.v4.view.PagerAdapter getAdapter()
+android.support.v4.view.ViewPager: void setOnAdapterChangeListener(android.support.v4.view.ViewPager$OnAdapterChangeListener)
+android.support.v4.view.ViewPager: void setCurrentItem(int)
+android.support.v4.view.ViewPager: int getCurrentItem()
+android.support.v4.view.ViewPager: void setOnPageChangeListener(android.support.v4.view.ViewPager$OnPageChangeListener)
+android.support.v4.view.ViewPager: int getOffscreenPageLimit()
+android.support.v4.view.ViewPager: void setOffscreenPageLimit(int)
+android.support.v4.view.ViewPager: void setPageMargin(int)
+android.support.v4.view.ViewPager: int getPageMargin()
+android.support.v4.view.ViewPager: void setPageMarginDrawable(android.graphics.drawable.Drawable)
+android.support.v4.view.ViewPager: void setPageMarginDrawable(int)
+android.support.v4.view.ViewPager: void setScrollingCacheEnabled(boolean)
+android.support.v4.view.ViewPager$SavedState
+android.support.v4.view.ViewPager$SavedState: android.os.Parcelable$Creator CREATOR
+com.woozzu.android.widget.IndexableListView
+com.woozzu.android.widget.IndexableListView: IndexableListView(android.content.Context)
+com.woozzu.android.widget.IndexableListView: IndexableListView(android.content.Context,android.util.AttributeSet)
+com.woozzu.android.widget.IndexableListView: IndexableListView(android.content.Context,android.util.AttributeSet,int)
+com.woozzu.android.widget.IndexableListView: void setFastScrollEnabled(boolean)
+com.woozzu.android.widget.IndexableListView: void setAdapter(android.widget.ListAdapter)
+net.mypapit.mobile.callsignview.CallsignDetailActivity
+net.mypapit.mobile.callsignview.CallsignDetailActivity: CallsignDetailActivity()
+net.mypapit.mobile.callsignview.CallsignDetailActivity: void onClick(android.view.View)
+net.mypapit.mobile.callsignview.CallsignViewActivity
+net.mypapit.mobile.callsignview.CallsignViewActivity: CallsignViewActivity()
+net.mypapit.mobile.callsignview.CallsignViewActivity: void onClick(android.view.View)
+net.mypapit.mobile.callsignview.ClearableEditText
+net.mypapit.mobile.callsignview.ClearableEditText: ClearableEditText(android.content.Context,android.util.AttributeSet)
+net.mypapit.mobile.callsignview.ClearableEditText: ClearableEditText(android.content.Context)
+net.mypapit.mobile.callsignview.ClearableEditText: ClearableEditText(android.content.Context,android.util.AttributeSet,int)
+net.mypapit.mobile.callsignview.ClearableEditText: java.lang.String getText()
+net.mypapit.mobile.callsignview.ClearableEditText: void setHint(java.lang.String)
+net.mypapit.mobile.callsignview.CustomWindow: CustomWindow()
+net.mypapit.mobile.callsignview.R$anim: int csfade
+net.mypapit.mobile.callsignview.R$anim: int slide_up
+net.mypapit.mobile.callsignview.R$drawable: int aboutbutton
+net.mypapit.mobile.callsignview.R$drawable: int container_dropshadow
+net.mypapit.mobile.callsignview.R$drawable: int details_gradient
+net.mypapit.mobile.callsignview.R$drawable: int details_header
+net.mypapit.mobile.callsignview.R$drawable: int details_outline
+net.mypapit.mobile.callsignview.R$drawable: int gradient_bg
+net.mypapit.mobile.callsignview.R$drawable: int gradient_bg_hover
+net.mypapit.mobile.callsignview.R$drawable: int gradient_custom_window_title
+net.mypapit.mobile.callsignview.R$drawable: int ic_action_search
+net.mypapit.mobile.callsignview.R$drawable: int ic_launcher
+net.mypapit.mobile.callsignview.R$drawable: int ic_launcher_window
+net.mypapit.mobile.callsignview.R$drawable: int ic_menu_add
+net.mypapit.mobile.callsignview.R$drawable: int ic_menu_add_hover
+net.mypapit.mobile.callsignview.R$drawable: int ic_menu_info_details
+net.mypapit.mobile.callsignview.R$drawable: int ic_menu_info_details_hover
+net.mypapit.mobile.callsignview.R$drawable: int ic_menu_share
+net.mypapit.mobile.callsignview.R$drawable: int ic_menu_share_hover
+net.mypapit.mobile.callsignview.R$drawable: int ic_smallicon
+net.mypapit.mobile.callsignview.R$drawable: int image_clear
+net.mypapit.mobile.callsignview.R$drawable: int list_selector
+net.mypapit.mobile.callsignview.R$drawable: int no_image
+net.mypapit.mobile.callsignview.R$drawable: int ratebutton
+net.mypapit.mobile.callsignview.R$drawable: int sharebutton
+net.mypapit.mobile.callsignview.R$id: int AA
+net.mypapit.mobile.callsignview.R$id: int Expiry
+net.mypapit.mobile.callsignview.R$id: int bottom_details_layout
+net.mypapit.mobile.callsignview.R$id: int btnAbout
+net.mypapit.mobile.callsignview.R$id: int btnIcon
+net.mypapit.mobile.callsignview.R$id: int callsign
+net.mypapit.mobile.callsignview.R$id: int clearable_button_clear
+net.mypapit.mobile.callsignview.R$id: int clearable_edit
+net.mypapit.mobile.callsignview.R$id: int csdetails
+net.mypapit.mobile.callsignview.R$id: int csprefix
+net.mypapit.mobile.callsignview.R$id: int details_page_layout
+net.mypapit.mobile.callsignview.R$id: int etCallsignFilter
+net.mypapit.mobile.callsignview.R$id: int handle
+net.mypapit.mobile.callsignview.R$id: int handledetails
+net.mypapit.mobile.callsignview.R$id: int imageView1
+net.mypapit.mobile.callsignview.R$id: int ivAbout
+net.mypapit.mobile.callsignview.R$id: int lvCallsignView
+net.mypapit.mobile.callsignview.R$id: int no_image
+net.mypapit.mobile.callsignview.R$id: int progressBar1
+net.mypapit.mobile.callsignview.R$id: int sharebutton
+net.mypapit.mobile.callsignview.R$id: int spinPrefix
+net.mypapit.mobile.callsignview.R$id: int subtitleAA
+net.mypapit.mobile.callsignview.R$id: int subtitleExpiry
+net.mypapit.mobile.callsignview.R$id: int svAbout
+net.mypapit.mobile.callsignview.R$id: int textView1
+net.mypapit.mobile.callsignview.R$id: int textView2
+net.mypapit.mobile.callsignview.R$id: int top_details_layout
+net.mypapit.mobile.callsignview.R$id: int tvAbout
+net.mypapit.mobile.callsignview.R$id: int windowTitle
+net.mypapit.mobile.callsignview.R$layout: int about_dialog
+net.mypapit.mobile.callsignview.R$layout: int callsign_layout
+net.mypapit.mobile.callsignview.R$layout: int clearable_edit_text
+net.mypapit.mobile.callsignview.R$layout: int details_page
+net.mypapit.mobile.callsignview.R$layout: int main
+net.mypapit.mobile.callsignview.R$layout: int progress_dialog
+net.mypapit.mobile.callsignview.R$layout: int spinner_item_x
+net.mypapit.mobile.callsignview.R$layout: int window_title
+net.mypapit.mobile.callsignview.R$raw: int callsign
+net.mypapit.mobile.callsignview.R$string: int app_name
+net.mypapit.mobile.callsignview.R$string: int csprefixprompt
+net.mypapit.mobile.callsignview.R$string: int hello_world
+net.mypapit.mobile.callsignview.R$string: int menu_about
+net.mypapit.mobile.callsignview.R$string: int menu_rate
+net.mypapit.mobile.callsignview.R$string: int menu_settings
+net.mypapit.mobile.callsignview.R$string: int menu_share
+net.mypapit.mobile.callsignview.R$string: int no
+net.mypapit.mobile.callsignview.R$string: int promo_myrepeater_text
+net.mypapit.mobile.callsignview.R$string: int promo_myrepeater_title
+net.mypapit.mobile.callsignview.R$string: int title_activity_callsign_detail
+net.mypapit.mobile.callsignview.R$string: int txtLicense
+net.mypapit.mobile.callsignview.R$string: int yes
+net.mypapit.mobile.callsignview.R$style: int WindowTitleBackground
+net.mypapit.mobile.callsignview.R$style: int custom_title_theme
