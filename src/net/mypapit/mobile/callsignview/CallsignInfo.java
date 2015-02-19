@@ -14,8 +14,8 @@ package net.mypapit.mobile.callsignview;
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * MYCallsign 1.6.1 for Android <mypapit@gmail.com> (9w2wtf)
- * Copyright 2012, 2014 Mohammad Hafiz bin Ismail. All rights reserved.
+ * MYCallsign 1.7.0 for Android <mypapit@gmail.com> (9w2wtf)
+ * Copyright 2012-2015 Mohammad Hafiz bin Ismail. All rights reserved.
  *
  * Info url :
  * http://code.google.com/p/mycallsign-android/

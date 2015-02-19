@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    android:padding="8px"  
+    android:orientation="vertical"      >
+    
+    
+    <!--  Callsign view -->
+
+    <TextView
+        android:id="@+id/callsign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:height="60dp"
+        android:text="9wcallsign"
+        android:textColor="#0A0A0A"
+        android:textSize="48sp"
+        android:textStyle="bold" />
+        
+<!--  Handle Name view -->        
+
+        <TextView
+            android:id="@+id/handle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/callsign"
+            android:layout_marginLeft="8px"
+            android:text="Handle bin Ahmad Hamlussalam "
+            android:textColor="#343434"
+            android:textSize="32sp" />
+
+</RelativeLayout>

@@ -2,8 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" 
-    android:padding="8px"  
-    android:orientation="vertical"      >
+    android:padding="8dip"  
+    android:orientation="vertical" 
+        android:background="@drawable/container_dropshadow"
+    android:fadingEdgeLength="5sp"
+    
+         >
     
     
     <!--  Callsign view -->
@@ -11,19 +15,20 @@
                 android:id="@+id/callsign"
             android:layout_width="wrap_content"
             android:height="30dp"
-            android:textSize="24dip"
+            android:layout_marginLeft="8dip"
+            android:textSize="24sp"
             android:layout_height="wrap_content" android:text="9wcallsign"
-            android:textColor="#0A0A0A"
+            android:textColor="#333333"
             android:textStyle="bold"/>
         
         
 <!--  Handle Name view -->        
         <TextView
                 android:id="@+id/handle"
-                android:layout_marginLeft="8px"
+                android:layout_marginLeft="8dip"
                 android:layout_below="@id/callsign"
-                android:textColor="#343434"
-                android:textSize="17dip"
+                android:textColor="#999999"
+                android:textSize="16sp"
                 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:text="Handle Name"/>
