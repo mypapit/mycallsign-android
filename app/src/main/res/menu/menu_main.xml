@@ -1,0 +1,71 @@
+<!--
+  ~ Copyright (C) 2015 Mohammad Hafiz bin Ismail (mypapit)
+  ~
+  ~   This software is provided 'as-is', without any express or implied
+  ~   warranty.  In no event will the authors be held liable for any damages
+  ~   arising from the use of this software.
+  ~
+  ~   Permission is granted to anyone to use this software for any purpose,
+  ~   including commercial applications, and to alter it and redistribute it
+  ~   freely, subject to the following restrictions:
+  ~
+  ~   1. The origin of this software must not be misrepresented; you must not
+  ~      claim that you wrote the original software. If you use this software
+  ~      in a product, an acknowledgment in the product documentation would be
+  ~      appreciated but is not required.
+  ~   2. Altered source versions must be plainly marked as such, and must not be
+  ~      misrepresented as being the original software.
+  ~   3. This notice may not be removed or altered from any source distribution.
+  ~
+  ~   Mohammad Hafiz bin Ismail
+  ~   mypapit@gmail.com
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+    <item
+        android:id="@+id/action_filter"
+        android:orderInCategory="102"
+        android:title="@string/action_filter"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/search"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="@string/search_title"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="collapseActionView|ifRoom" />
+    <item
+        android:id="@+id/showMap"
+        android:icon="@android:drawable/ic_menu_mapmode"
+        android:orderInCategory="102"
+        android:title="@string/map_title"
+        app:showAsAction="ifRoom"
+
+        />
+
+    <item
+        android:id="@+id/showFavorites"
+        android:icon="@drawable/ic_action_favorite"
+        android:orderInCategory="101"
+        android:title="@string/favorite_title"
+        app:showAsAction="ifRoom"
+
+
+        />
+
+    <item
+        android:id="@+id/showStats"
+        android:orderInCategory="200"
+        android:title="@string/stats_title"
+
+        />
+
+    <item
+        android:id="@+id/showAbout"
+        android:orderInCategory="400"
+        android:title="@string/about_title"
+
+        />
+</menu>

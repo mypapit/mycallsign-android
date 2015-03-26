@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2015 Mohammad Hafiz bin Ismail (mypapit)
+  ~
+  ~   This software is provided 'as-is', without any express or implied
+  ~   warranty.  In no event will the authors be held liable for any damages
+  ~   arising from the use of this software.
+  ~
+  ~   Permission is granted to anyone to use this software for any purpose,
+  ~   including commercial applications, and to alter it and redistribute it
+  ~   freely, subject to the following restrictions:
+  ~
+  ~   1. The origin of this software must not be misrepresented; you must not
+  ~      claim that you wrote the original software. If you use this software
+  ~      in a product, an acknowledgment in the product documentation would be
+  ~      appreciated but is not required.
+  ~   2. Altered source versions must be plainly marked as such, and must not be
+  ~      misrepresented as being the original software.
+  ~   3. This notice may not be removed or altered from any source distribution.
+  ~
+  ~   Mohammad Hafiz bin Ismail
+  ~   mypapit@gmail.com
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingBottom="40dp"
+    android:paddingLeft="60dp"
+    android:paddingRight="60dp"
+    android:paddingTop="5dp">
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Please wait"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Populating Database"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp" />
+
+</LinearLayout>

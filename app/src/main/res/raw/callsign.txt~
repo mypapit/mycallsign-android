@@ -1,0 +1,1 @@
+CREATE TABLE "aa" ("_id" integer, "callsign" text,"handle" text ,"expire" text,"aa" text, "favorite" integer default 0,"frequency" integer default 0,"note" text default NULL);
