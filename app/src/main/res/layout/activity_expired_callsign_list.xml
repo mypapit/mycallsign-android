@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<!--
   ~ This file is part of MYCallsign
   ~
-  ~ Copyright (c) 2016 Mohammad Hafiz bin Ismail <mypapit@gmail.com>
+  ~ Copyright (c) 2015 Mohammad Hafiz bin Ismail <mypapit@gmail.com>
   ~ MYCallsign is free software; you can redistribute it and/or modify
   ~ it under the terms of the GNU General Public License as
   ~ published by the Free Software Foundation, either version 3
@@ -16,7 +16,7 @@
   ~ along with this program; if not, write to the Free Software
   ~ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
   ~
-  ~ Last Modified 2/23/15 8:13 PM
+  ~ Last Modified 6/20/15 1:43 PM
   ~  Info url :
   ~  http://code.google.com/p/mycallsign-android/
   ~  http://blog.mypapit.net
@@ -25,37 +25,37 @@
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:clipChildren="false"
-    android:clipToPadding="false"
-    android:gravity="center"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    android:paddingBottom="40dp"
-    android:paddingLeft="60dp"
-    android:paddingRight="60dp"
-    android:paddingTop="5dp">
+    tools:context="net.mypapit.mobile.callsignview.ExpiredCallsignListActivity"
+
+    >
 
     <TextView
-        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Please wait"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text="@string/strExpiredNotice"
+        android:id="@+id/textView"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal" />
 
-    <TextView
-        android:id="@+id/textView2"
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+ >
+
+
+    <ListView
+        android:id="@+id/expiredListView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Populating Database"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_height="wrap_content" />
 
-    <ProgressBar
-        android:id="@+id/progressBar1"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="20dp" />
 
+
+</RelativeLayout>
 </LinearLayout>

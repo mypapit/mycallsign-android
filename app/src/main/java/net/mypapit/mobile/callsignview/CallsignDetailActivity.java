@@ -36,7 +36,6 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.ShareActionProvider;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.animation.Animation;
@@ -153,7 +152,7 @@ public class CallsignDetailActivity extends ActionBarActivity implements Compoun
 
         if (cursor.getInt(FAVORITE) > 0) {
             btnStar.setChecked(true);
-            Log.d("net.mypapit.mobile.TVCALLSIGNROW", "CHECKBOX-setchecked-early: " + btnStar.toString());
+           // Log.d("net.mypapit.mobile.TVCALLSIGNROW", "CHECKBOX-setchecked-early: " + btnStar.toString());
         } else {
             btnStar.setChecked(false);
         }
@@ -207,24 +206,6 @@ public class CallsignDetailActivity extends ActionBarActivity implements Compoun
                     NavUtils.navigateUpFromSameTask(this);
                 }
                 break;
-/*
-            case R.id.action_sharedetails:
-                intent = new Intent(android.content.Intent.ACTION_SEND);
-                intent.setType("text/plain");
-
-                intent.putExtra(Intent.EXTRA_SUBJECT, "Callsign: " + csinfo.getCallsign());
-                intent.putExtra(Intent.EXTRA_TITLE, "Callsign: " + csinfo.getCallsign());
-                intent.putExtra(Intent.EXTRA_TEXT, "Callsign: " + csinfo.getCallsign() + "\nHandle: " + csinfo.getHandle() + "\nAA: " + csinfo.getAa() + "\nExpiry: " + csinfo.getExpire() + "\n");
-
-                this.setShareIntent(intent);
-
-
-                //startActivity(Intent.createChooser(intent, "Send via "));
-
-
-                break;*/
-
-
         }
         return true;
 

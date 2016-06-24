@@ -1,3 +1,29 @@
+/*
+ * This file is part of MYCallsign
+ *
+ * Copyright (c) 2016 Mohammad Hafiz bin Ismail <mypapit@gmail.com>
+ * MYCallsign is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ *
+ * Last Modified 12/14/15 9:58 PM
+ *  Info url :
+ *  http://code.google.com/p/mycallsign-android/
+ *  http://blog.mypapit.net
+ *  http://kirostudio.com
+ *  http://mypapit.net
+ */
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
@@ -5,7 +31,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.0.0'
+        classpath 'com.android.tools.build:gradle:2.1.2'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -15,5 +41,8 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+
+        maven { url "https://jitpack.io" }
+
     }
 }

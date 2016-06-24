@@ -16,20 +16,34 @@
   ~ along with this program; if not, write to the Free Software
   ~ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
   ~
-  ~ Last Modified 2/23/15 8:13 PM
+  ~ Last Modified 6/22/16 5:40 PM
   ~  Info url :
+  ~  https://github.com/mypapit/mycallsign-android
   ~  http://code.google.com/p/mycallsign-android/
-  ~  http://blog.mypapit.net
+  ~  https://blog.mypapit.net
   ~  http://kirostudio.com
-  ~  http://mypapit.net
+  ~
   -->
 
 <resources>
-    <!-- Example customization of dimensions originally defined in res/values/dimens.xml
-         (such as screen margins) for screens with more than 820dp of available width. This
-         would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively). -->
-    <dimen name="activity_horizontal_margin">64dp</dimen>
-    <dimen name="activity_horizontal_margin2">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
-    <item name="isTablet" type="integer">1</item>
+    <!--
+    TODO: Before you release your application, you need a Google Maps API key.
+
+    To do this, you can either add your release key credentials to your existing
+    key, or create a new key.
+
+    Note that this file specifies the API key for the release build target.
+    If you have previously set up a key for the debug target with the debug signing certificate,
+    you will also need to set up a key for your release certificate.
+
+    Follow the directions here:
+
+    https://developers.google.com/maps/documentation/android/signup
+
+    Once you have your key (it starts with "AIza"), replace the "google_maps_key"
+    string in this file.
+    -->
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">
+        AIzaSyC9-wwn_PV-PjfA-V7mLBPqwD3iNPsCqmc
+    </string>
 </resources>

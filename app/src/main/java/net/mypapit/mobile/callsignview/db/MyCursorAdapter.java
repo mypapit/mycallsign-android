@@ -120,7 +120,7 @@ public class MyCursorAdapter extends CursorAdapter implements SectionIndexer, Co
         holder.roundView = (RoundedImageView) view.findViewById(R.id.roundView);
         holder.btnStar = (DontPressWithParentCheckBox) view.findViewById(R.id.btn_star);
 
-
+/*
         try {
             Date date = sdf.parse(cursor.getString(EXPIRE));
 
@@ -133,9 +133,11 @@ public class MyCursorAdapter extends CursorAdapter implements SectionIndexer, Co
         } catch (ParseException exception) {
 
         }
+*/
 
-        holder.btnStar.setOnCheckedChangeListener(null);
 
+        //holder.btnStar.setOnCheckedChangeListener(null);
+/*
         if (cursor.getInt(FAVORITE) > 0) {
             holder.btnStar.setChecked(true);
             Log.d("net.mypapit.mobile.TVCALLSIGNROW", "CHECKBOX-setchecked-early: " + holder.btnStar.toString());
@@ -145,6 +147,7 @@ public class MyCursorAdapter extends CursorAdapter implements SectionIndexer, Co
 
         holder.btnStar.setOnCheckedChangeListener(this);
         // holder.btnStar.setTag(R.id.btn_star,cursor);
+*/
 
         view.setTag(holder);
         return view;
@@ -158,7 +161,7 @@ public class MyCursorAdapter extends CursorAdapter implements SectionIndexer, Co
         holder = (ViewHolder) view.getTag();
         holder.tvCallsignRow.setText(cursor.getString(CALLSIGN));
         holder.tvHandleRow.setText(cursor.getString(HANDLE));
-        holder.btnStar.setTag(holder.btnStar.getId(), holder.tvCallsignRow.getText().toString());
+       // holder.btnStar.setTag(holder.btnStar.getId(), holder.tvCallsignRow.getText().toString());
 
         // holder.btnStar.setTag(R.id.btn_star,cursor.getPosition());
 
@@ -175,7 +178,7 @@ public class MyCursorAdapter extends CursorAdapter implements SectionIndexer, Co
 
 
 
-/*
+
 
 
 
@@ -194,7 +197,6 @@ public class MyCursorAdapter extends CursorAdapter implements SectionIndexer, Co
 
 
 
-*/
 
 
 /*

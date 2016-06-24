@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ Copyright (C) 2015 Mohammad Hafiz bin Ismail (mypapit)
+  ~ This file is part of MYCallsign
   ~
-  ~   This software is provided 'as-is', without any express or implied
-  ~   warranty.  In no event will the authors be held liable for any damages
-  ~   arising from the use of this software.
+  ~ Copyright (c) 2016 Mohammad Hafiz bin Ismail <mypapit@gmail.com>
+  ~ MYCallsign is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as
+  ~ published by the Free Software Foundation, either version 3
+  ~ of the License, or (at your option) any later version.
   ~
-  ~   Permission is granted to anyone to use this software for any purpose,
-  ~   including commercial applications, and to alter it and redistribute it
-  ~   freely, subject to the following restrictions:
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
   ~
-  ~   1. The origin of this software must not be misrepresented; you must not
-  ~      claim that you wrote the original software. If you use this software
-  ~      in a product, an acknowledgment in the product documentation would be
-  ~      appreciated but is not required.
-  ~   2. Altered source versions must be plainly marked as such, and must not be
-  ~      misrepresented as being the original software.
-  ~   3. This notice may not be removed or altered from any source distribution.
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program; if not, write to the Free Software
+  ~ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
   ~
-  ~   Mohammad Hafiz bin Ismail
-  ~   mypapit@gmail.com
+  ~ Last Modified 4/4/16 12:05 AM
+  ~  Info url :
+  ~  http://code.google.com/p/mycallsign-android/
+  ~  http://blog.mypapit.net
+  ~  http://kirostudio.com
+  ~  http://mypapit.net
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="net.mypapit.mobile.callsignview">
@@ -28,6 +31,12 @@
     <uses-permission android:name="android.permisssion.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permisssion.ACCESS_COARSE_LOCATION" />
 
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality. 
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -46,13 +55,31 @@
         <activity
             android:name=".CallsignDetailActivity"
             android:label="@string/app_name"
-            android:parentActivityName=".FavoriteActivity"></activity>
+            android:parentActivityName=".FavoriteActivity" />
         <activity
             android:name=".FavoriteActivity"
-            android:label="@string/title_activity_favorite"></activity>
+            android:label="@string/title_activity_favorite" />
         <activity
             android:name=".StatsActivity"
-            android:label="@string/title_activity_stats"></activity>
+            android:label="@string/title_activity_stats" />
+        <activity
+            android:name=".ExpiredCallsignListActivity"
+            android:label="@string/title_activity_expired_callsign_list"></activity>
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps"></activity>
     </application>
 
 </manifest>

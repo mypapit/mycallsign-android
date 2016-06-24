@@ -31,7 +31,7 @@ import java.io.Serializable;
 /**
  * Created by mypapit on 2/8/15.
  */
-class Callsign implements Serializable {
+public class Callsign implements Serializable {
     private String callsign;
     private String handle, aa, expire;
     private int count, favorite;

@@ -27,6 +27,7 @@
 package net.mypapit.mobile.callsignview;
 
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Context;
@@ -39,6 +40,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatDialog;
 import android.support.v7.widget.SearchView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -56,7 +58,7 @@ import android.widget.SectionIndexer;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.MaterialDialogCompat;
+//import com.afollestad.materialdialogs.MaterialDialogCompat;
 import com.makeramen.RoundedImageView;
 import com.nispok.snackbar.Snackbar;
 
@@ -71,7 +73,7 @@ import java.util.Date;
 public class MainActivity extends ActionBarActivity implements SearchView.OnQueryTextListener {
 
     //please increment strDBVERSION when callsign.txt is updated
-    public static final int strDBVERSION = 0x24;
+    public static final int strDBVERSION = 0x30;
     private ConstantsInstaller placeData;
     private SQLiteDatabase db;
     private Cursor cursor, defaultcursor;
@@ -79,7 +81,7 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
     private SearchView searchView;
     private MyCursorAdapter adapter;
     private ListView lv;
-    Dialog progressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,25 +93,8 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
         SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
         mSearchHandle = prefs.getBoolean("mSearchHandle", false);
 
-        //getSupportActionBar().getThemedContext().setTheme(R.style.Theme_MYCallsignTheme);
-/*
-        CallsignList cslist;
 
-        cslist = new CallsignList(40);
-
-        for (int counter=0;counter<10;counter++) {
-            cslist.add(new Callsign("9W2WTF", "MOHAMMAD HAFIZ BIN ISMAIL"));
-            cslist.add(new Callsign("9W2WTF", "MOHAMMAD HAFIZ BIN ISMAIL"));
-        }
-*/
-        //CallsignAdapter adapter= new CallsignAdapter(cslist,this);
         lv = (ListView) this.findViewById(R.id.listView);
-/*
-        progressDialog = new Dialog(this);
-        progressDialog.setContentView(R.layout.progress_dialog);
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-*/
         new LoadDatabaseTask(this).execute("load database");
 
 
@@ -182,7 +167,11 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
             //noinspection SimplifiableIfStatement
             case R.id.action_filter:
                 //MaterialDialog dialog;
-                MaterialDialogCompat.Builder dialogBuilder = new MaterialDialogCompat.Builder(this);
+               // MaterialDialogCompat.Builder dialogBuilder = new MaterialDialogCompat.Builder(this);
+
+
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+
                 dialogBuilder.setTitle("Search by");
                 dialogBuilder.setSingleChoiceItems(new String[]{"Callsign", "Handle"}, -1, new DialogInterface.OnClickListener() {
 
@@ -222,7 +211,12 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
 
 
             case R.id.showMap:
-                Snackbar.with(this).text("Map is not available yet").show(this);
+                //Snackbar.with(this).text("Map is not available yet").show(this);
+                intent = new Intent(getApplicationContext(),MapsActivity.class);
+                startActivity(intent);
+
+
+
 
                 break;
 
@@ -371,9 +365,9 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
 
     private void showDialog() throws PackageManager.NameNotFoundException {
 
-        final Dialog dialog = new Dialog(this);
+        final AppCompatDialog dialog = new AppCompatDialog(this);
         dialog.setContentView(R.layout.about_dialog);
-        dialog.setTitle("About MYCallsign " + getPackageManager().getPackageInfo(getPackageName(), 0).versionName);
+        dialog.setTitle("MYCallsign " + getPackageManager().getPackageInfo(getPackageName(), 0).versionName);
         dialog.setCancelable(true);
 
         // display licence text and disclaimer
@@ -472,9 +466,12 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
             try {
                 Date date = sdf.parse(cursor.getString(EXPIRE));
 
+
                 if (now.after(date)) {
                     holder.roundView.setColorFilter(colorfilter, android.graphics.PorterDuff.Mode.MULTIPLY);
-                } else {
+                }
+
+                else {
                     holder.roundView.clearColorFilter();
                 }
 
@@ -540,7 +537,7 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
             lv.setFastScrollEnabled(true);
             lv.setVerticalFadingEdgeEnabled(false);
             lv.setVerticalScrollBarEnabled(true);
-            //progressDialog.dismiss();
+
         }
     }
 

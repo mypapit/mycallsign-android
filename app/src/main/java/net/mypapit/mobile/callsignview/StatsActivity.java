@@ -26,6 +26,7 @@
 
 package net.mypapit.mobile.callsignview;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -33,6 +34,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import net.mypapit.mobile.callsignview.db.ConstantsInstaller;
@@ -54,6 +57,7 @@ public class StatsActivity extends ActionBarActivity {
     private int totalentries, count9w, count9m, count9w2, count9w6, count9w8;
     private ConstantsInstaller placeData;
     private SQLiteDatabase db;
+    private Button button;
 
 
     @Override
@@ -66,11 +70,29 @@ public class StatsActivity extends ActionBarActivity {
         PieChartView chart;
         PieChartData data;
 
+        button = (Button) findViewById(R.id.btnExpired);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (view.getId() == R.id.btnExpired) {
+                    Intent intent = new Intent(StatsActivity.this, ExpiredCallsignListActivity.class);
+                    startActivity(intent);
+
+
+
+
+                }
+
+
+
+            }
+        });
+
 
         SharedPreferences prefs = getSharedPreferences("stats", MODE_PRIVATE);
 
         int version = MainActivity.strDBVERSION;
-
         if (placeData == null || db == null || !db.isOpen()) {
             placeData = new ConstantsInstaller(this, "callsign.db", null, version, R.raw.callsign);
             db = placeData.getReadableDatabase();
@@ -78,13 +100,11 @@ public class StatsActivity extends ActionBarActivity {
 
         }
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-
         int totalexpired = db.rawQuery("SELECT _id from aa WHERE expire < ?", new String[]{sdf.format(new Date())}).getCount();
 
-        totalentries = prefs.getInt("totalentries", 100);
+        totalentries = prefs.getInt("totalentries", 270);
         count9m = prefs.getInt("count9m", 50);
-        count9w = prefs.getInt("count9w", 75);
+        count9w = prefs.getInt("count9w", 225);
         count9w2 = prefs.getInt("count9w2", 75);
         count9w6 = prefs.getInt("count9w6", 75);
         count9w8 = prefs.getInt("count9w8", 75);
@@ -129,7 +149,7 @@ public class StatsActivity extends ActionBarActivity {
         SliceValue sliceothers = new SliceValue(totalentries - (count9m + count9w2 + count9w6 + count9w8), ChartUtils.pickColor());
 
         float percent9m = (float) count9m / (float) totalentries;
-        float percent9w = (float) count9w / (float) totalentries;
+       // float percent9w = (float) count9w / (float) totalentries;
         float percent9w2 = (float) count9w2 / (float) totalentries;
         float percent9w6 = (float) count9w6 / (float) totalentries;
         float percent9w8 = (float) count9w8 / (float) totalentries;
@@ -209,4 +229,13 @@ public class StatsActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
 
     }
+
+    protected void onPause() {
+        super.onPause();
+
+        overridePendingTransition(R.anim.activity_open_scale, R.anim.activity_close_translate);
+
+
+    }
+
 }

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<!--
   ~ This file is part of MYCallsign
   ~
   ~ Copyright (c) 2016 Mohammad Hafiz bin Ismail <mypapit@gmail.com>
@@ -16,27 +16,20 @@
   ~ along with this program; if not, write to the Free Software
   ~ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
   ~
-  ~ Last Modified 2/23/15 8:13 PM
+  ~ Last Modified 6/22/16 5:40 PM
   ~  Info url :
+  ~  https://github.com/mypapit/mycallsign-android
   ~  http://code.google.com/p/mycallsign-android/
-  ~  http://blog.mypapit.net
+  ~  https://blog.mypapit.net
   ~  http://kirostudio.com
-  ~  http://mypapit.net
+  ~
   -->
 
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <stroke
-        android:width="1dp"
-        android:color="@color/deep_orange_A700" />
-    <padding
-        android:bottom="7dp"
-        android:left="7dp"
-        android:right="7dp"
-        android:top="7dp" />
-    <corners android:radius="0dp" />
-    <gradient
-        android:angle="-90"
-        android:endColor="@color/orange_A400"
-        android:startColor="@color/orange_A400" />
-
-</shape>
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/map"
+    android:name="com.google.android.gms.maps.SupportMapFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MapsActivity" />
