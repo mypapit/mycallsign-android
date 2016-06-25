@@ -28,6 +28,7 @@ package net.mypapit.mobile.callsignview;
 
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -37,10 +38,16 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.preference.DialogPreference;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatDialog;
 import android.support.v7.widget.SearchView;
+import android.transition.Slide;
+import android.transition.TransitionInflater;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -62,11 +69,20 @@ import com.nispok.snackbar.Snackbar;
 
 import net.mypapit.mobile.callsignview.db.ConstantsInstaller;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 //import com.afollestad.materialdialogs.MaterialDialogCompat;
 
@@ -74,7 +90,11 @@ import java.util.Date;
 public class MainActivity extends ActionBarActivity implements SearchView.OnQueryTextListener {
 
     //please increment strDBVERSION when callsign.txt is updated
-    public static final int strDBVERSION = 0x30;
+    public static final int strDBVERSION = 0x31;
+    public static final String CLIENT_VERSION ="MYCallsign/2.1.0";
+    public static final String URL_API = "http://api.repeater.my/v1/callsign/endp.php";
+    public static final String QUERY_API = "http://api.repeater.my/v1/callsign/getcount.php";
+
     private ConstantsInstaller placeData;
     private SQLiteDatabase db;
     private Cursor cursor, defaultcursor;
@@ -82,6 +102,7 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
     private SearchView searchView;
     private MyCursorAdapter adapter;
     private ListView lv;
+    private MainActivity activity;
 
 
     @Override
@@ -89,7 +110,12 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_scale);
+
+        activity = this;
+
+
+
+       overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_scale);
 
         SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
         mSearchHandle = prefs.getBoolean("mSearchHandle", false);
@@ -111,10 +137,42 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
                 cs.setAa(cursor1.getString(cursor1.getColumnIndex("aa")));
                 cs.setExpire(cursor1.getString(cursor1.getColumnIndex("expire")));
 
+                //cursor1.close();
+
+                OkHttpClient client = new OkHttpClient();
+
+                RequestBody formbody = new FormBody.Builder()
+                        .add("apiver","1")
+                        .add("callsign",cs.getCallsign())
+                        .add("device", Build.PRODUCT +" " + Build.MODEL)
+                        .add("client",CLIENT_VERSION)
+                        .build();
+                Request request = new Request.Builder()
+                        .url("http://api.repeater.my/v1/callsign/endp.php")
+                        .post(formbody)
+                        .build();
+
+                client.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        Log.d("OKHttp",e.getMessage());
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        System.out.println(response.body().string());
+
+                    }
+                });
+
+                ActivityOptionsCompat options = ActivityOptionsCompat.
+                        makeSceneTransitionAnimation(activity, (View) view, "profile");
 
                 passIntent.putExtra("Callsign", cs);
 
-                startActivityForResult(passIntent, -1);
+                startActivityForResult(passIntent, -1,options.toBundle());
+
 
             }
         });
@@ -342,7 +400,7 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
 
     protected void onPause() {
         super.onPause();
-        overridePendingTransition(R.anim.activity_open_scale, R.anim.activity_close_translate);
+        //overridePendingTransition(R.anim.activity_open_scale, R.anim.activity_close_translate);
 
 
     }
@@ -372,6 +430,26 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
         dialog.show();
 
     }
+
+
+
+    public ProgressDialog progressDialog(){
+
+        ProgressDialog dialog = new ProgressDialog(this);
+        dialog.setMessage(getResources().getString(R.string.progress_dialog));
+        dialog.setTitle(getResources().getString(R.string.progress_title));
+        dialog.setCancelable(false);
+        dialog.setIndeterminate(true);
+        dialog.show();
+
+        return dialog;
+
+
+
+    }
+
+
+
 
     /**
      * Created by mypapit on 2/8/15.
@@ -447,6 +525,7 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
 
         }
 
+
         @Override
         public void bindView(View view, Context context, Cursor cursor) {
 
@@ -495,6 +574,7 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
 
     class LoadDatabaseTask extends AsyncTask<String, String, String> {
 
+       private  ProgressDialog dialog;
 
         private final MainActivity activity;
 
@@ -505,6 +585,7 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
 
         protected void onPreExecute() {
             super.onPreExecute();
+            dialog=activity.progressDialog();
 
 
         }
@@ -537,6 +618,7 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
             lv.setFastScrollEnabled(true);
             lv.setVerticalFadingEdgeEnabled(false);
             lv.setVerticalScrollBarEnabled(true);
+            dialog.dismiss();
 
         }
     }

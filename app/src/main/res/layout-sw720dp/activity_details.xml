@@ -9,41 +9,43 @@
   ~
   ~ This program is distributed in the hope that it will be useful,
   ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
-  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  Smee the
   ~ GNU General Public License for more details.
   ~
   ~ You should have received a copy of the GNU General Public License
   ~ along with this program; if not, write to the Free Software
   ~ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
   ~
-  ~ Last Modified 2/23/15 8:13 PM
+  ~ Last Modified 3/31/16 8:27 AM
   ~  Info url :
+  ~  https://github.com/mypapit/mycallsign-android
   ~  http://code.google.com/p/mycallsign-android/
-  ~  http://blog.mypapit.net
+  ~  https://blog.mypapit.net
   ~  http://kirostudio.com
-  ~  http://mypapit.net
+  ~
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
-    android:layout_width="match_parent"
+    android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical">
+    android:orientation="horizontal">
 
 
     <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/detail_wrap_size"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
         android:background="@color/dark_purple_500"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+
+        >
 
         <com.makeramen.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/roundView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
+            android:layout_above="@+id/tvdHandle"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/activity_horizontal_margin2"
             android:paddingBottom="@dimen/activity_vertical_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:scaleType="fitCenter"
@@ -55,23 +57,27 @@
             app:riv_oval="true"
             app:riv_tile_mode="repeat"
             android:transitionName="profile"
-
             />
 
         <TextView
             android:id="@+id/tvdHandle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/activity_horizontal_margin2"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/activity_horizontal_margin2"
             android:text="MOHAMMAD HAFIZ BIN ISMAIL"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#ffffff" />
 
 
     </RelativeLayout>
 
-    <include layout="@layout/details_bit" />
+    <include
+        layout="@layout/details_bit"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin2" />
 
 </LinearLayout>

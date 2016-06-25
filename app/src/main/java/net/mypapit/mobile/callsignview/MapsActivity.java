@@ -37,13 +37,18 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -57,10 +62,6 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.nispok.snackbar.Snackbar;
-import com.squareup.okhttp.HttpUrl;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -68,6 +69,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import si.virag.fuzzydateformatter.FuzzyDateTimeFormatter;
 
 
@@ -91,6 +96,19 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_scale);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-3163716613766876~7020251873");
+
+        AdView mAdView = (AdView) findViewById(R.id.adViewMap);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -164,6 +182,25 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    protected void onPause() {
+        super.onPause();
+
+        overridePendingTransition(R.anim.activity_open_scale, R.anim.activity_close_translate);
+
+
+    }
+
 
     protected void onStart() {
         mGoogleApiClient.connect();
@@ -200,7 +237,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         for (CallsignModel callsign : callsigns) {
 
 
-            Log.d("mypapit callsign", callsign.callsign);
+            //Log.d("mypapit callsign", callsign.callsign);
             MarkerOptions marking = new MarkerOptions();
             DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             java.util.Date time;

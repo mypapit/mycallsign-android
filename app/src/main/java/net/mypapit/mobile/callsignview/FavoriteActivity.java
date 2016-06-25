@@ -32,6 +32,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
@@ -63,6 +64,7 @@ public class FavoriteActivity extends ActionBarActivity {
     private SQLiteDatabase db;
     private Cursor cursor, defaultcursor;
     private MyCursorAdapter adapter;
+    private FavoriteActivity activity;
 
 
     @Override
@@ -72,6 +74,8 @@ public class FavoriteActivity extends ActionBarActivity {
         overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_scale);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        activity = this;
 
 
         lv = (ListView) this.findViewById(R.id.listViewFavorite);
@@ -109,10 +113,16 @@ public class FavoriteActivity extends ActionBarActivity {
                 cs.setAa(cursor1.getString(cursor1.getColumnIndex("aa")));
                 cs.setExpire(cursor1.getString(cursor1.getColumnIndex("expire")));
 
+             //   cursor1.close();
+
+
+                ActivityOptionsCompat options = ActivityOptionsCompat.
+                        makeSceneTransitionAnimation(activity, (View) view, "profile");
+
 
                 passIntent.putExtra("restartActivity", true);
                 passIntent.putExtra("Callsign", cs);
-                startActivityForResult(passIntent, -1);
+                startActivityForResult(passIntent, -1,options.toBundle());
 
             }
         });
@@ -131,8 +141,8 @@ public class FavoriteActivity extends ActionBarActivity {
 
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
-                break;
+                supportFinishAfterTransition();
+                return true;
         }
 
         return super.onOptionsItemSelected(item);

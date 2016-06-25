@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * Last Modified 2/23/15 2:45 AM
+ * Last Modified 2/23/16 2:45 AM
  *  Info url :
  *  http://code.google.com/p/mycallsign-android/
  *  http://blog.mypapit.net
@@ -45,12 +45,14 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.makeramen.RoundedImageView;
 import com.nispok.snackbar.Snackbar;
 
 import net.mypapit.mobile.callsignview.db.ConstantsInstaller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -68,6 +70,7 @@ public class CallsignDetailActivity extends ActionBarActivity implements Compoun
     private Cursor cursor;
     private boolean restartActivity;
     private ShareActionProvider mShareActionProvider;
+    private RoundedImageView imageView;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,6 +104,7 @@ public class CallsignDetailActivity extends ActionBarActivity implements Compoun
         TextView tvAA = (TextView) findViewById(R.id.tvdAA);
         TextView tvExpire = (TextView) findViewById(R.id.tvdExpiry);
         btnStar = (CheckBox) findViewById(R.id.btn_star);
+        imageView = (RoundedImageView) findViewById(R.id.roundView);
 
 
         tvCallsign.setText(csinfo.getCallsign());
@@ -113,9 +117,27 @@ public class CallsignDetailActivity extends ActionBarActivity implements Compoun
             String expire = tvExpire.getText().toString();
             Date date = sdf.parse(expire);
 
+           final int colorfilter = this.getResources().getColor(R.color.orange_A400);
+            final int colorfilter5years = this.getResources().getColor(R.color.red_A400);
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(new Date());
+            calendar.add(Calendar.YEAR, -5);
+            Date fiveYears = calendar.getTime();
+
+
             if (new Date().after(date)) {
                 tvExpire.setText(expire + " (EXPIRED)");
+                imageView.setColorFilter(colorfilter, android.graphics.PorterDuff.Mode.MULTIPLY);
+
             }
+
+            if (fiveYears.after(date)) {
+                imageView.clearColorFilter();
+                imageView.setColorFilter(colorfilter5years, android.graphics.PorterDuff.Mode.MULTIPLY);
+            }
+
+
 
 
         } catch (ParseException exception) {
@@ -197,14 +219,10 @@ public class CallsignDetailActivity extends ActionBarActivity implements Compoun
 
         switch (item.getItemId()) {
             case android.R.id.home:
-                if (!restartActivity) {
-                    finish();
-                } else {
-                    NavUtils.navigateUpFromSameTask(this);
-                }
-                break;
+                    supportFinishAfterTransition();
+                return true;
         }
-        return true;
+        return super.onOptionsItemSelected(item);
 
 
     }

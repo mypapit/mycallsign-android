@@ -31,7 +31,8 @@
         <item name="colorPrimaryDark">@color/dark_purple_700</item>
         <item name="colorPrimary">@color/dark_purple_500</item>
         <item name="colorAccent">@color/orange_A400</item>
-        <item name="android:fastScrollPreviewBackgroundRight">@drawable/fastscroll_back_new</item>
+        <item name="android:fastScrollPreviewBackgroundRight">@drawable/fastscroll_back_new </item>
+        <item name="android:windowContentTransitions">true</item>
 
 
 

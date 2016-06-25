@@ -16,7 +16,7 @@
   ~ along with this program; if not, write to the Free Software
   ~ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
   ~
-  ~ Last Modified 6/22/16 5:40 PM
+  ~ Last Modified 6/25/16 8:39 PM
   ~  Info url :
   ~  https://github.com/mypapit/mycallsign-android
   ~  http://code.google.com/p/mycallsign-android/
@@ -24,39 +24,35 @@
   ~  http://kirostudio.com
   ~
   -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-
-
-    tools:context=".MapsActivity"
-    android:orientation="vertical"
-    xmlns:ads="http://schemas.android.com/apk/res-auto"
-    >
-
-    <RelativeLayout
+    tools:context=".TopQueriedFragment">
+    <LinearLayout android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/adViewMap"
+        android:layout_height="match_parent"
+        >
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
+            android:text="@string/fragments_top_query_30days"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_margin="4dip"
+            />
 
-            ads:adSize="SMART_BANNER"
-            ads:adUnitId="@string/ad_unit_id"/>
+    <ListView
+        android:id="@+id/lisviewTopQuery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        >
+    </ListView>
+    </LinearLayout>
 
-    </RelativeLayout>
 
-
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/map"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MapsActivity" />
-</LinearLayout>
+</FrameLayout>

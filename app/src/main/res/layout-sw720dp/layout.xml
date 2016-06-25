@@ -55,12 +55,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/roundView"
-        android:layout_marginLeft="10dip"
+        android:layout_marginLeft="24dip"
         android:layout_toRightOf="@+id/roundView"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:text="9W2WTF"
         android:textColor="@color/label_title"
-        android:textSize="20sp"
+        android:textSize="42sp"
         android:textStyle="bold"
         android:typeface="sans"
 
@@ -72,7 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tvCallsignrow"
         android:layout_below="@+id/tvCallsignrow"
-
+        android:textSize="24sp"
 
         android:text="MOHAMMAD HAFIZ BIN ISMAIL"
         android:textColor="@color/label_value" />
