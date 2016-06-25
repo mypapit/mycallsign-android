@@ -7,7 +7,7 @@ MYCallsign is an Android application for looking up Malaysian Amateur Radio (ham
 ### Website and Downloads
 Go to [MYCallsign-android Website] (http://mypapit.github.io/mycallsign-android/) for more information
 
-### Get it on Google Play Store
+### Get it on Google Play!
 [MYCallsign Android Play Store Link] (https://play.google.com/store/apps/details?id=net.mypapit.mobile.callsignview)
 
 ### Screenshots
