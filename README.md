@@ -8,8 +8,8 @@ MYCallsign is an Android application for looking up Malaysian Amateur Radio (ham
 Go to [MYCallsign-android Website] (http://mypapit.github.io/mycallsign-android/) for more information
 
 ### Screenshots
-[alt screenshot3](https://s31.postimg.org/cx6s6pbaf/Screenshot_20160625_125929.png)
-[alt screenshot4](https://s31.postimg.org/5rf14927b/Screenshot_20160625_125951.png)
-[alt screenshot1](https://s31.postimg.org/cfbmqulpj/Screenshot_20160625_130006.png)
-[alt screenshot2](img=https://s31.postimg.org/seuaaehrb/Screenshot_20160625_125959.png)
+![alt screenshot3](https://s31.postimg.org/cx6s6pbaf/Screenshot_20160625_125929.png)
+![alt screenshot4](https://s31.postimg.org/5rf14927b/Screenshot_20160625_125951.png)
+![alt screenshot1](https://s31.postimg.org/cfbmqulpj/Screenshot_20160625_130006.png)
+![alt screenshot2](https://s31.postimg.org/seuaaehrb/Screenshot_20160625_125959.png)
 
