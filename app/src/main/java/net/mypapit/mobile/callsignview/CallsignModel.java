@@ -48,7 +48,7 @@ public class CallsignModel {
     public double lat;
 
     @SerializedName("lng")
-    public double  lng;
+    public double lng;
 
     @SerializedName("locality")
     public String locality;
@@ -72,21 +72,12 @@ public class CallsignModel {
     public String client;
 
 
-    public LatLng getLatLng(){
-        return new LatLng(lat,lng);
+    public LatLng getLatLng() {
+
+
+        return new LatLng(lat, lng);
 
     }
 
-
-
-
-
-
-
-}
-
-class CallsignResponse {
-
-    public CallsignModel[] callsigns;
 
 }

@@ -28,7 +28,6 @@ package net.mypapit.mobile.callsignview;
 
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -58,7 +57,6 @@ import android.widget.SectionIndexer;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//import com.afollestad.materialdialogs.MaterialDialogCompat;
 import com.makeramen.RoundedImageView;
 import com.nispok.snackbar.Snackbar;
 
@@ -67,7 +65,10 @@ import net.mypapit.mobile.callsignview.db.ConstantsInstaller;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+
+//import com.afollestad.materialdialogs.MaterialDialogCompat;
 
 
 public class MainActivity extends ActionBarActivity implements SearchView.OnQueryTextListener {
@@ -98,9 +99,6 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
         new LoadDatabaseTask(this).execute("load database");
 
 
-
-
-
         lv.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -108,19 +106,14 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
                 passIntent.setClassName("net.mypapit.mobile.callsignview", "net.mypapit.mobile.callsignview.CallsignDetailActivity");
 
                 Cursor cursor1 = (Cursor) lv.getItemAtPosition(position);
-                //  db = placeData.getReadableDatabase();
-                Cursor cursor2 = db.rawQuery(
-                        "SELECT _id,callsign,handle,aa,expire FROM aa WHERE callsign LIKE ?",
-                        new String[]{"%" + cursor1.getString(cursor1.getColumnIndex("callsign"))});
-                cursor2.moveToFirst();
 
-
-                Callsign cs = new Callsign(cursor2.getString(cursor2.getColumnIndex("callsign")), cursor2.getString(cursor2.getColumnIndex("handle")));
-                cs.setAa(cursor2.getString(cursor2.getColumnIndex("aa")));
-                cs.setExpire(cursor2.getString(cursor2.getColumnIndex("expire")));
+                Callsign cs = new Callsign(cursor1.getString(cursor1.getColumnIndex("callsign")), cursor1.getString(cursor1.getColumnIndex("handle")));
+                cs.setAa(cursor1.getString(cursor1.getColumnIndex("aa")));
+                cs.setExpire(cursor1.getString(cursor1.getColumnIndex("expire")));
 
 
                 passIntent.putExtra("Callsign", cs);
+
                 startActivityForResult(passIntent, -1);
 
             }
@@ -167,7 +160,7 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
             //noinspection SimplifiableIfStatement
             case R.id.action_filter:
                 //MaterialDialog dialog;
-               // MaterialDialogCompat.Builder dialogBuilder = new MaterialDialogCompat.Builder(this);
+                // MaterialDialogCompat.Builder dialogBuilder = new MaterialDialogCompat.Builder(this);
 
 
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
@@ -177,7 +170,7 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences("prefs", getApplicationContext().MODE_PRIVATE).edit();
+                        SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences("prefs", Context.MODE_PRIVATE).edit();
 
                         switch (which) {
                             case 0:
@@ -185,7 +178,7 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
                                 searchView.setQueryHint("Search Callsign");
                                 showToast("Search by Callsign");
                                 editor.putBoolean("mSearchHandle", mSearchHandle);
-                                editor.commit();
+                                editor.apply();
 
 
                                 break;
@@ -195,7 +188,7 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
                                 searchView.setQueryHint("Search Handle/Name");
                                 showToast("Search by Handle/Name ");
                                 editor.putBoolean("mSearchHandle", mSearchHandle);
-                                editor.commit();
+                                editor.apply();
 
                                 break;
 
@@ -212,10 +205,8 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
 
             case R.id.showMap:
                 //Snackbar.with(this).text("Map is not available yet").show(this);
-                intent = new Intent(getApplicationContext(),MapsActivity.class);
+                intent = new Intent(getApplicationContext(), MapsActivity.class);
                 startActivity(intent);
-
-
 
 
                 break;
@@ -387,15 +378,14 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
      */
     private class MyCursorAdapter extends CursorAdapter implements SectionIndexer {
         private final int EXPIRE, CALLSIGN, HANDLE, FAVORITE;
+        private final int colorfilter, colorfilter5years;
         private LayoutInflater inflater;
-        private AlphabetIndexer mAlphabetIndexer;
+        private final AlphabetIndexer mAlphabetIndexer;
         private TextView tvCallsignRow, tvHandleRow;
         private RoundedImageView roundView;
-        private DateFormat sdf;
-        private Date now;
-        private int colorfilter;
-
-        private ConstantsInstaller pdata;
+        private final DateFormat sdf;
+        private final Date now;
+        private final ConstantsInstaller pdata;
 
         private ViewHolder holder;
         //   Context context;
@@ -413,6 +403,7 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
             HANDLE = cursor.getColumnIndex("handle");
             FAVORITE = cursor.getColumnIndex("favorite");
             colorfilter = context.getResources().getColor(R.color.orange_A400);
+            colorfilter5years = context.getResources().getColor(R.color.red_A400);
 
 
             //inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -466,14 +457,23 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
             try {
                 Date date = sdf.parse(cursor.getString(EXPIRE));
 
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(new Date());
+                calendar.add(Calendar.YEAR, -5);
+                Date fiveYears = calendar.getTime();
+
 
                 if (now.after(date)) {
                     holder.roundView.setColorFilter(colorfilter, android.graphics.PorterDuff.Mode.MULTIPLY);
-                }
-
-                else {
+                } else {
                     holder.roundView.clearColorFilter();
                 }
+
+                if (fiveYears.after(date)) {
+                    holder.roundView.clearColorFilter();
+                    holder.roundView.setColorFilter(colorfilter5years, android.graphics.PorterDuff.Mode.MULTIPLY);
+                }
+
 
             } catch (ParseException exception) {
 
@@ -496,7 +496,7 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
     class LoadDatabaseTask extends AsyncTask<String, String, String> {
 
 
-        private MainActivity activity;
+        private final MainActivity activity;
 
         public LoadDatabaseTask(MainActivity activity) {
             this.activity = activity;
@@ -522,7 +522,7 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
 
             }
 
-            cursor = db.query("aa", new String[]{"_id", "callsign", "handle", "expire", "favorite"},
+            cursor = db.query("aa", new String[]{"_id", "callsign", "handle", "expire", "favorite", "aa"},
                     null, null, null, null, null);
             defaultcursor = cursor;
 
@@ -531,7 +531,7 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
         }
 
         protected void onPostExecute(String test) {
-            adapter = new MyCursorAdapter(activity, cursor, placeData, adapter.FLAG_REGISTER_CONTENT_OBSERVER);
+            adapter = new MyCursorAdapter(activity, cursor, placeData, MyCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
 
             lv.setAdapter(adapter);
             lv.setFastScrollEnabled(true);

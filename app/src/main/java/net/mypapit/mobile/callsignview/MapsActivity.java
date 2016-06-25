@@ -29,16 +29,14 @@ package net.mypapit.mobile.callsignview;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.location.Location;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
@@ -68,7 +66,6 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 
 import si.virag.fuzzydateformatter.FuzzyDateTimeFormatter;
@@ -76,21 +73,19 @@ import si.virag.fuzzydateformatter.FuzzyDateTimeFormatter;
 
 interface OnMarkerRequestListener {
 
-    public void markerRequestCompleted(String jsonString);
+    void markerRequestCompleted(String jsonString);
 
 }
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
-        OnMarkerRequestListener,GoogleMap.OnInfoWindowClickListener {
+        OnMarkerRequestListener, GoogleMap.OnInfoWindowClickListener {
 
+    public static final String URL_API = "http://api.repeater.my/v1/getposition.php";
+    private Location mLastKnownLocation;
+    private HashMap<Marker, CallsignModel> hashmap;
     private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
-    public static final String URL_API="http://api.repeater.my/v1/getposition.php";
-    Location mLastKnownLocation;
-    HashMap<Marker,CallsignModel> hashmap;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +96,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        hashmap = new HashMap<Marker,CallsignModel>();
+        hashmap = new HashMap<Marker, CallsignModel>();
 
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -112,14 +107,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
 
-
-
-
-
-
     }
-
-
 
 
     /**
@@ -192,8 +180,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         mLastKnownLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
 
-        if (mLastKnownLocation !=null){
-            new MarkerRequest(mLastKnownLocation,this).execute();
+        if (mLastKnownLocation != null) {
+            new MarkerRequest(mLastKnownLocation, this).execute();
         }
 
     }
@@ -201,23 +189,21 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void markerRequestCompleted(String jsonString) {
 
 
-        if (jsonString == null){
+        if (jsonString == null) {
             return;
         }
         Gson gson = new Gson();
 
-        CallsignModel[] callsigns= gson.fromJson(jsonString,CallsignModel[].class);
+        CallsignModel[] callsigns = gson.fromJson(jsonString, CallsignModel[].class);
 
 
-
-        for (CallsignModel callsign: callsigns){
-
+        for (CallsignModel callsign : callsigns) {
 
 
-                    Log.d("mypapit callsign", callsign.callsign);
+            Log.d("mypapit callsign", callsign.callsign);
             MarkerOptions marking = new MarkerOptions();
             DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            java.util.Date time = new java.util.Date();
+            java.util.Date time;
 
 
             try {
@@ -228,7 +214,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 e.printStackTrace();
             }
 
-            String timedistance= FuzzyDateTimeFormatter.getTimeAgo(getApplicationContext(), time);
+            String timedistance = FuzzyDateTimeFormatter.getTimeAgo(getApplicationContext(), time);
 
             marking.position(callsign.getLatLng());
             marking.title(new StringBuilder(callsign.callsign).append(" - ")
@@ -242,21 +228,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 marking.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
             }
 
-            hashmap.put(mMap.addMarker(marking),callsign);
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mLastKnownLocation.getLatitude(),mLastKnownLocation.getLongitude()),10));
+            hashmap.put(mMap.addMarker(marking), callsign);
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude()), 10));
             mMap.setOnInfoWindowClickListener(this);
 
 
-
-
-
-
-
         }
-
-
-
-
 
 
     }
@@ -278,20 +255,19 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         CallsignModel cs = hashmap.get(marker);
 
 
-        if (cs.phoneno == null){
+        if (cs.phoneno == null) {
             Snackbar.with(this).text("No phone number :(").show(this);
             return;
         }
 
-        if (cs.phoneno.length()>3 && !cs.phoneno.equals("+60120000")){
-            Uri uri = Uri.parse("smsto:"+cs.phoneno);
-            Intent intent = new Intent(Intent.ACTION_SENDTO,uri);
-            intent.putExtra("sms_body","hello " + cs.callsign+", ");
+        if (cs.phoneno.length() > 3 && !cs.phoneno.equals("+60120000")) {
+            Uri uri = Uri.parse("smsto:" + cs.phoneno);
+            Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
+            intent.putExtra("sms_body", "hello " + cs.callsign + ", ");
             startActivity(intent);
 
 
-
-        } else{
+        } else {
 
             Snackbar.with(this).text("No phone number :(").show(this);
         }
@@ -300,11 +276,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 }
 
 
-class MarkerRequest extends AsyncTask<Void,Void,String>{
+class MarkerRequest extends AsyncTask<Void, Void, String> {
 
-    Location location;
-    OnMarkerRequestListener listener;
-    public MarkerRequest(Location location, OnMarkerRequestListener listener){
+    private final Location location;
+    private final OnMarkerRequestListener listener;
+
+    public MarkerRequest(Location location, OnMarkerRequestListener listener) {
         this.location = location;
         this.listener = listener;
 
@@ -317,8 +294,8 @@ class MarkerRequest extends AsyncTask<Void,Void,String>{
 
         HttpUrl.Builder httpUrl = HttpUrl.parse(MapsActivity.URL_API).newBuilder();
 
-        httpUrl.addQueryParameter("lat",Double.toString(location.getLatitude()));
-        httpUrl.addQueryParameter("lng",Double.toString(location.getLongitude()));
+        httpUrl.addQueryParameter("lat", Double.toString(location.getLatitude()));
+        httpUrl.addQueryParameter("lng", Double.toString(location.getLongitude()));
 
         Request request = new Request.Builder()
                 .url(httpUrl.build().toString())
@@ -329,8 +306,8 @@ class MarkerRequest extends AsyncTask<Void,Void,String>{
             Response response = client.newCall(request).execute();
             return response.body().string();
 
-        } catch (IOException ioex){
-            Log.e("okhttp mypapit","Error calling callsign API");
+        } catch (IOException ioex) {
+            Log.e("okhttp mypapit", "Error calling callsign API");
             ioex.printStackTrace();
             return null;
 
@@ -338,10 +315,9 @@ class MarkerRequest extends AsyncTask<Void,Void,String>{
         }
 
 
-
     }
 
-    public void onPostExecute(String json){
+    public void onPostExecute(String json) {
 
         listener.markerRequestCompleted(json);
 

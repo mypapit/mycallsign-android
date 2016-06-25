@@ -36,7 +36,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class ConstantsInstaller extends DatabaseInstaller {
     private SQLiteDatabase db;
-    private Activity context;
+    private final Activity context;
 
 
     public ConstantsInstaller(Activity context, String name, SQLiteDatabase.CursorFactory factory,

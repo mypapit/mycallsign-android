@@ -29,9 +29,9 @@ package net.mypapit.mobile.callsignview;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -51,7 +51,6 @@ public class ExpiredCallsignListActivity extends ActionBarActivity {
     private Cursor cursor;
     private ListView listView;
     private MyCursorAdapter adapter;
-
 
 
     @Override
@@ -79,9 +78,9 @@ public class ExpiredCallsignListActivity extends ActionBarActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String in5years = sdf.format(calendar.getTime());
 
-        cursor =  db.rawQuery("SELECT * from aa WHERE expire < ?", new String[]{in5years});
+        cursor = db.rawQuery("SELECT * from aa WHERE expire < ?", new String[]{in5years});
 
-        adapter = new MyCursorAdapter(this, cursor, placeData, adapter.FLAG_REGISTER_CONTENT_OBSERVER);
+        adapter = new MyCursorAdapter(this, cursor, placeData, MyCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
 
         listView.setAdapter(adapter);
         listView.setFastScrollEnabled(true);
@@ -92,20 +91,16 @@ public class ExpiredCallsignListActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent passIntent = new Intent();
-                passIntent.setClassName("net.mypapit.mobile.callsignview", "net.mypapit.mobile.callsignview.CallsignDetailActivity");
+                Intent passIntent = new Intent(getApplicationContext(), CallsignDetailActivity.class);
+
 
                 Cursor cursor1 = (Cursor) listView.getItemAtPosition(position);
-                //  db = placeData.getReadableDatabase();
-                Cursor cursor2 = db.rawQuery(
-                        "SELECT _id,callsign,handle,aa,expire FROM aa WHERE callsign LIKE ?",
-                        new String[]{"%" + cursor1.getString(cursor1.getColumnIndex("callsign"))});
-                cursor2.moveToFirst();
 
 
-                Callsign cs = new Callsign(cursor2.getString(cursor2.getColumnIndex("callsign")), cursor2.getString(cursor2.getColumnIndex("handle")));
-                cs.setAa(cursor2.getString(cursor2.getColumnIndex("aa")));
-                cs.setExpire(cursor2.getString(cursor2.getColumnIndex("expire")));
+
+                Callsign cs = new Callsign(cursor1.getString(cursor1.getColumnIndex("callsign")), cursor1.getString(cursor1.getColumnIndex("handle")));
+                cs.setAa(cursor1.getString(cursor1.getColumnIndex("aa")));
+                cs.setExpire(cursor1.getString(cursor1.getColumnIndex("expire")));
 
 
                 passIntent.putExtra("Callsign", cs);
@@ -115,11 +110,10 @@ public class ExpiredCallsignListActivity extends ActionBarActivity {
         });
 
 
-
     }
 
 
-   @Override
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long

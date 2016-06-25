@@ -46,7 +46,7 @@ import java.io.InputStreamReader;
 public abstract class DatabaseInstaller extends SQLiteOpenHelper {
 
     private Context ctxt = null;
-    private int resource;
+    private final int resource;
     private SQLiteDatabase database;
     private int mOpenedConnections = 0;
 
@@ -62,13 +62,7 @@ public abstract class DatabaseInstaller extends SQLiteOpenHelper {
 
     public void onCreate(SQLiteDatabase db) {
 
-        // pd = ProgressDialog.show(ctxt, "Please wait...",
-        // "Importing database",false,true);
-
-        // Thread thread = new Thread(this);
-        // thread.start();
-
-        this.database = db;
+       this.database = db;
         try {
             InputStream stream = ctxt.getResources().openRawResource(resource);
             InputStreamReader is = new InputStreamReader(stream);
@@ -82,18 +76,17 @@ public abstract class DatabaseInstaller extends SQLiteOpenHelper {
             }
 
             in.close();
-            // ctxt.hideProgress();
-            // pd.dismiss();
+
 
         } catch (IOException e) {
             Log.d(this.toString(), "error while installing callsign db: " + e,
                     e);
-            // pd.dismiss();
+
         } finally {
 
         }
 
-        SharedPreferences.Editor editor = ctxt.getSharedPreferences("stats", ctxt.MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = ctxt.getSharedPreferences("stats", Context.MODE_PRIVATE).edit();
 
 
         int count9m = db.rawQuery("SELECT _id FROM aa WHERE callsign LIKE ? ", new String[]{"9M%"}).getCount();
@@ -113,7 +106,7 @@ public abstract class DatabaseInstaller extends SQLiteOpenHelper {
         Log.d("Total DB", "Total Entries: " + totalentries + ", Total 9M: " + count9m + ", Total 9W: " + count9w);
 
 
-        editor.commit();
+        editor.apply();
 
 
     }

@@ -33,8 +33,7 @@
         android:icon="@android:drawable/ic_menu_share"
         android:orderInCategory="105"
         android:title="@string/btnshare"
-        app:showAsAction="ifRoom"
         app:actionProviderClass="android.support.v7.widget.ShareActionProvider"
-        />
+        app:showAsAction="ifRoom" />
 
 </menu>

@@ -48,6 +48,7 @@ import net.mypapit.mobile.callsignview.R;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -60,12 +61,12 @@ public class MyCursorAdapter extends CursorAdapter implements SectionIndexer, Co
     private AlphabetIndexer mAlphabetIndexer;
     private TextView tvCallsignRow, tvHandleRow;
     private RoundedImageView roundView;
-    private DateFormat sdf;
-    private Date now;
-    private int colorfilter;
+    private final DateFormat sdf;
+    private final Date now;
+    private final int colorfilter, colorfilter5years;
     private DontPressWithParentCheckBox btnStar;
     //private SQLiteDatabase db;
-    private ConstantsInstaller pdata;
+    private final ConstantsInstaller pdata;
 
     private ViewHolder holder;
     //   Context context;
@@ -83,6 +84,7 @@ public class MyCursorAdapter extends CursorAdapter implements SectionIndexer, Co
         HANDLE = cursor.getColumnIndex("handle");
         FAVORITE = cursor.getColumnIndex("favorite");
         colorfilter = context.getResources().getColor(R.color.orange_A400);
+        colorfilter5years = context.getResources().getColor(R.color.red_A400);
 
 
         //inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -120,34 +122,6 @@ public class MyCursorAdapter extends CursorAdapter implements SectionIndexer, Co
         holder.roundView = (RoundedImageView) view.findViewById(R.id.roundView);
         holder.btnStar = (DontPressWithParentCheckBox) view.findViewById(R.id.btn_star);
 
-/*
-        try {
-            Date date = sdf.parse(cursor.getString(EXPIRE));
-
-            if (now.after(date)) {
-                holder.roundView.setColorFilter(colorfilter, android.graphics.PorterDuff.Mode.MULTIPLY);
-            } else {
-                holder.roundView.clearColorFilter();
-            }
-
-        } catch (ParseException exception) {
-
-        }
-*/
-
-
-        //holder.btnStar.setOnCheckedChangeListener(null);
-/*
-        if (cursor.getInt(FAVORITE) > 0) {
-            holder.btnStar.setChecked(true);
-            Log.d("net.mypapit.mobile.TVCALLSIGNROW", "CHECKBOX-setchecked-early: " + holder.btnStar.toString());
-        } else {
-            holder.btnStar.setChecked(false);
-        }
-
-        holder.btnStar.setOnCheckedChangeListener(this);
-        // holder.btnStar.setTag(R.id.btn_star,cursor);
-*/
 
         view.setTag(holder);
         return view;
@@ -161,77 +135,31 @@ public class MyCursorAdapter extends CursorAdapter implements SectionIndexer, Co
         holder = (ViewHolder) view.getTag();
         holder.tvCallsignRow.setText(cursor.getString(CALLSIGN));
         holder.tvHandleRow.setText(cursor.getString(HANDLE));
-       // holder.btnStar.setTag(holder.btnStar.getId(), holder.tvCallsignRow.getText().toString());
 
-        // holder.btnStar.setTag(R.id.btn_star,cursor.getPosition());
-
-
-/*
-
-        tvCallsignRow = (TextView) view.findViewById(R.id.tvCallsignrow);
-        tvHandleRow = (TextView) view.findViewById(R.id.tvHandlerow);
-        roundView = (RoundedImageView) view.findViewById(R.id.roundView);
-        btnStar = (CheckBox) view.findViewById(R.id.btn_star);
-
-*/
-
-
-
-
-
-
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.add(Calendar.YEAR, -5);
+        Date fiveYears = calendar.getTime();
 
 
         try {
             Date date = sdf.parse(cursor.getString(EXPIRE));
 
-            if (now.after(date)){
+            if (now.after(date)) {
                 holder.roundView.setColorFilter(colorfilter, android.graphics.PorterDuff.Mode.MULTIPLY);
             } else {
                 holder.roundView.clearColorFilter();
             }
 
-        } catch (ParseException exception){
-
-        }
-
-
-
-
-
-/*
-        CompoundButton.OnCheckedChangeListener mStarCheckedChanceChangeListener = new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Cursor tempcursor;
-                if (isChecked) {
-                    tempcursor=db.rawQuery("UPDATE aa SET favorite=? WHERE callsign=?", new String[]{"1", tvCallsignRow.getText().toString()});
-
-
-                } else {
-                    tempcursor=db.rawQuery("UPDATE aa SET favorite=? WHERE callsign=?", new String[]{"0", tvCallsignRow.getText().toString()});
-
-
-
-                }
-
-                tempcursor.moveToFirst();
-                tempcursor.close();
-
-
-
-
-
-
-
-
-
-
-
-                // do nothing
+            if (fiveYears.after(date)) {
+                holder.roundView.clearColorFilter();
+                holder.roundView.setColorFilter(colorfilter5years, android.graphics.PorterDuff.Mode.MULTIPLY);
             }
-        };
-*/
+
+
+        } catch (ParseException exception) {
+            holder.roundView.clearColorFilter();
+        }
 
 
     }
@@ -243,56 +171,42 @@ public class MyCursorAdapter extends CursorAdapter implements SectionIndexer, Co
 
 
         ContentValues values = new ContentValues();
-        int row = 0;
+        int row;
 
         String cs = (String) holder.btnStar.getTag(buttonView.getId());
 
 
         SQLiteDatabase db = pdata.getWritableDatabase();
         db.beginTransaction();
-        // String cs = current.getString(current.getColumnIndex("callsign"));
+
         if (isChecked) {
 
 
-            //          tempcursor=db.rawQuery("UPDATE aa SET favorite=? WHERE callsign=?", new String[]{"1", tvCallsignRow.getText().toString()});
-
             values.put("favorite", 1);
             row = db.update("aa", values, "callsign = ?", new String[]{cs});
-            Log.d("net.mypapit.mobile.TVCALLSIGNROW", "CHECKBOXpressed: " + buttonView.toString());
-            Log.d("net.mypapit.mobile.TVCALLSIGNROW", "rows affected,checked: " + row + "cs:  " + cs);
+            Log.d("TVCALLSIGNROW", "CHECKBOXpressed: " + buttonView.toString());
+            Log.d("TVCALLSIGNROW", "rows affected,checked: " + row + "cs:  " + cs);
 
 
         } else {
 
-            //        tempcursor=db.rawQuery("UPDATE aa SET favorite=? WHERE callsign=?", new String[]{"0", tvCallsignRow.getText().toString()});
+
             values.put("favorite", 0);
             row = db.update("aa", values, "callsign = ?", new String[]{cs});
-            //Log.d("net.mypapit.mobile.TVCALLSIGNROW", "CHECKBOXpressed/unchecked: " + buttonView.toString());
-            Log.d("net.mypapit.mobile.TVCALLSIGNROW", "rows affected: " + row);
-            Log.d("net.mypapit.mobile.TVCALLSIGNROW", "rows affected,checked: " + row + "cs:  " + cs);
+
+            Log.d("TVCALLSIGNROW", "rows affected: " + row);
+            Log.d("TVCALLSIGNROW", "rows affected,checked: " + row + "cs:  " + cs);
 
 
         }
         db.setTransactionSuccessful();
 
-        //   onContentChanged();
-        // db.close();
+
         db.endTransaction();
 
 
-        //  tempcursor.moveToFirst();
-        //tempcursor.close();
         getCursor().requery();
-/*
-        Cursor newCursor=db.query("aa", new String[] { "_id", "callsign", "handle","expire","favorite" },
-                null, null, null, null, null);
-        newCursor.moveToFirst();
-        mAlphabetIndexer = new AlphabetIndexer(newCursor,
-                newCursor.getColumnIndex("handle"),
-                " ABCDEFGHIJKLMNOPQRTSUVWXYZ");
 
-
-        changeCursor(newCursor);*/
 
         notifyDataSetChanged();
 
@@ -302,8 +216,6 @@ public class MyCursorAdapter extends CursorAdapter implements SectionIndexer, Co
     protected void onContentChanged() {
         super.onContentChanged();
 
-
-        // notifyDataSetChanged();
 
     }
 

@@ -40,8 +40,12 @@
     <string name="btnfavorite">Favorite</string>
     <string name="txtLicense">Copyright © 2016 Mohammad Hafiz Ismail\nEmail: &lt;mypapit@gmail.com>\nWeb: https://github.com/mypapit/mycallsign-android\nFacebook: fb.me/mycallsign\nDatabase update: 2016-04-08\n\nThis program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.\n\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\nSee the GNU General Public License for more details: http://www.gnu.org/licenses/gpl.html\n\n<b>DISCLAIMER:</b> This application is not created nor endorsed  by Malaysian Communications &amp; Multimedia Commission (MCMC)."</string>
     <string name="string_btn_list5yearsexpired"><![CDATA[Expired Callsign >5 years]]></string>
-    <string name="title_activity_expired_callsign_list">List of Expired Callsign</string>
+    <string name="title_activity_expired_callsign_list">Expired Callsigns</string>
     <string name="strExpiredNotice">Expired callsigns (>5 years)</string>
     <string name="title_activity_maps">Map</string>
+    <string name="callsign_will_expire_90days">callsigns will expire in 90 days</string>
+    <string name="listed_callsign">listed callsigns!</string>
+    <string name="expired_until_today">callsigns expired until today</string>
+
 
 </resources>

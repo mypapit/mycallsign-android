@@ -50,8 +50,7 @@
         android:layout_below="@+id/chartTitle"
         android:layout_centerHorizontal="true"
 
-        android:text="@string/hello_world"
-/>
+        android:text="@string/hello_world" />
 
     <TextView
         android:id="@+id/expiredfutureTitle"
@@ -68,19 +67,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/expiredfutureTitle"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"></lecho.lib.hellocharts.view.PieChartView>
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/expiredfutureTitle"></lecho.lib.hellocharts.view.PieChartView>
 
     <Button
+        android:id="@+id/btnExpired"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/string_btn_list5yearsexpired"
-        android:id="@+id/btnExpired"
         android:layout_alignTop="@+id/chart"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:text="@string/string_btn_list5yearsexpired" />
 
 
 </RelativeLayout>

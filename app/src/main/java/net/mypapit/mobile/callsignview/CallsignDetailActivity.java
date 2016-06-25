@@ -57,14 +57,11 @@ import java.util.Date;
  * Created by mypapit on 2/9/15.
  */
 public class CallsignDetailActivity extends ActionBarActivity implements CompoundButton.OnCheckedChangeListener, ShareActionProvider.OnShareTargetSelectedListener {
-    int FAVORITE;
+    private int FAVORITE;
     private Callsign csinfo;
     private TextView tvHandle, tvCallsign;
     private AnimationSet animSet;
     private Animation anim;
-    //private ImageView btnQrz;
-    // private static double TENSION = 900.0;
-    // private static double DAMPER = 10.0; //friction
     private ConstantsInstaller placeData;
     private SQLiteDatabase db;
     private CheckBox btnStar;
@@ -123,6 +120,7 @@ public class CallsignDetailActivity extends ActionBarActivity implements Compoun
 
         } catch (ParseException exception) {
 
+
         }
 
 
@@ -152,7 +150,7 @@ public class CallsignDetailActivity extends ActionBarActivity implements Compoun
 
         if (cursor.getInt(FAVORITE) > 0) {
             btnStar.setChecked(true);
-           // Log.d("net.mypapit.mobile.TVCALLSIGNROW", "CHECKBOX-setchecked-early: " + btnStar.toString());
+            // Log.d("net.mypapit.mobile.TVCALLSIGNROW", "CHECKBOX-setchecked-early: " + btnStar.toString());
         } else {
             btnStar.setChecked(false);
         }
@@ -187,13 +185,12 @@ public class CallsignDetailActivity extends ActionBarActivity implements Compoun
             intent.putExtra(Intent.EXTRA_TEXT, "Callsign: " + csinfo.getCallsign() + "\nHandle: " + csinfo.getHandle() + "\nAA: " + csinfo.getAa() + "\nExpiry: " + csinfo.getExpire() + "\n");
 
 
-
             mShareActionProvider.setShareIntent(intent);
         }
 
     }
 
-        //this.getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+    //this.getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent;

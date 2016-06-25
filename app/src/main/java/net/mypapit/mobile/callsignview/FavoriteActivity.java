@@ -53,6 +53,7 @@ import net.mypapit.mobile.callsignview.db.ConstantsInstaller;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -84,14 +85,12 @@ public class FavoriteActivity extends ActionBarActivity {
 
         }
 
-       /* cursor = db.query("aa", new String[] { "_id", "callsign", "handle","expire","favorite" },
-                null, null, null, null, null);*/
 
         cursor = db.rawQuery("SELECT * from aa WHERE favorite > ?", new String[]{"0"});
         defaultcursor = cursor;
 
 
-        adapter = new MyCursorAdapter(this, cursor, placeData, adapter.FLAG_REGISTER_CONTENT_OBSERVER);
+        adapter = new MyCursorAdapter(this, cursor, placeData, MyCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
 
 
         lv.setAdapter(adapter);
@@ -100,20 +99,15 @@ public class FavoriteActivity extends ActionBarActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent passIntent = new Intent();
-                passIntent.setClassName("net.mypapit.mobile.callsignview", "net.mypapit.mobile.callsignview.CallsignDetailActivity");
+                Intent passIntent = new Intent(getApplicationContext(),CallsignDetailActivity.class);
+
 
                 Cursor cursor1 = (Cursor) lv.getItemAtPosition(position);
-                //  db = placeData.getReadableDatabase();
-                Cursor cursor2 = db.rawQuery(
-                        "SELECT _id,callsign,handle,aa,expire FROM aa WHERE callsign LIKE ?",
-                        new String[]{"%" + cursor1.getString(cursor1.getColumnIndex("callsign"))});
-                cursor2.moveToFirst();
 
 
-                Callsign cs = new Callsign(cursor2.getString(cursor2.getColumnIndex("callsign")), cursor2.getString(cursor2.getColumnIndex("handle")));
-                cs.setAa(cursor2.getString(cursor2.getColumnIndex("aa")));
-                cs.setExpire(cursor2.getString(cursor2.getColumnIndex("expire")));
+                Callsign cs = new Callsign(cursor1.getString(cursor1.getColumnIndex("callsign")), cursor1.getString(cursor1.getColumnIndex("handle")));
+                cs.setAa(cursor1.getString(cursor1.getColumnIndex("aa")));
+                cs.setExpire(cursor1.getString(cursor1.getColumnIndex("expire")));
 
 
                 passIntent.putExtra("restartActivity", true);
@@ -156,16 +150,16 @@ public class FavoriteActivity extends ActionBarActivity {
         private LayoutInflater inflater;
 
 
-        private AlphabetIndexer mAlphabetIndexer;
+        private final AlphabetIndexer mAlphabetIndexer;
         private TextView tvCallsignRow, tvHandleRow;
         private RoundedImageView roundView;
-        private DateFormat sdf;
-        private Date now;
-        private int EXPIRE, CALLSIGN, HANDLE, FAVORITE;
-        private int colorfilter;
+        private final DateFormat sdf;
+        private final Date now;
+        private final int EXPIRE, CALLSIGN, HANDLE, FAVORITE;
+        private final int colorfilter;
 
         //private SQLiteDatabase db;
-        private ConstantsInstaller pdata;
+        private final ConstantsInstaller pdata;
 
         private ViewHolder holder;
         //   Context context;
@@ -220,6 +214,13 @@ public class FavoriteActivity extends ActionBarActivity {
             holder.roundView = (RoundedImageView) view.findViewById(R.id.roundView);
 
 
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(new Date());
+            calendar.add(Calendar.YEAR, -5);
+            Date fiveYears = calendar.getTime();
+            final int colorfilter5years = context.getResources().getColor(R.color.red_A400);
+
+
             try {
                 Date date = sdf.parse(cursor.getString(EXPIRE));
 
@@ -229,12 +230,16 @@ public class FavoriteActivity extends ActionBarActivity {
                     holder.roundView.clearColorFilter();
                 }
 
-            } catch (ParseException exception) {
+                if (fiveYears.after(date)) {
+                    holder.roundView.clearColorFilter();
+                    holder.roundView.setColorFilter(colorfilter5years, android.graphics.PorterDuff.Mode.MULTIPLY);
+                }
 
+
+            } catch (ParseException exception) {
+                holder.roundView.clearColorFilter();
             }
 
-
-            // holder.btnStar.setTag(R.id.btn_star,cursor);
 
             view.setTag(holder);
             return view;

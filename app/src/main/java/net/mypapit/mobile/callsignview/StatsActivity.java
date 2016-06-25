@@ -54,7 +54,7 @@ import lecho.lib.hellocharts.view.PieChartView;
 
 
 public class StatsActivity extends ActionBarActivity {
-    private int totalentries, count9w, count9m, count9w2, count9w6, count9w8;
+
     private ConstantsInstaller placeData;
     private SQLiteDatabase db;
     private Button button;
@@ -66,6 +66,8 @@ public class StatsActivity extends ActionBarActivity {
         setContentView(R.layout.activity_stats);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        int totalentries, count9w, count9m, count9w2, count9w6, count9w8;
 
         PieChartView chart;
         PieChartData data;
@@ -80,10 +82,7 @@ public class StatsActivity extends ActionBarActivity {
                     startActivity(intent);
 
 
-
-
                 }
-
 
 
             }
@@ -125,14 +124,14 @@ public class StatsActivity extends ActionBarActivity {
         if (totalexpiredin90days < 0) {
             tvExpiredfuture.setText("");
         } else {
-            tvExpiredfuture.setText(tf.format(totalexpiredin90days) + " callsigns will expire in 90 days");
+            tvExpiredfuture.setText(tf.format(totalexpiredin90days) + " " + getString(R.string.callsign_will_expire_90days));
         }
 
 
         //tv.setText("Total Entries: " + totalentries + ", Total 9M: "+ count9m+", Total 9W: " + count9w+", Total expired: "+totalexpired);
 
-        tv.setText(tf.format(totalentries) + " listed callsigns!");
-        tvExpired.setText(tf.format(totalexpired) + " callsigns expired until today");
+        tv.setText(tf.format(totalentries) + " "+getString(R.string.listed_callsign));
+        tvExpired.setText(tf.format(totalexpired) + " "+getString(R.string.expired_until_today));
 
         chart = (PieChartView) findViewById(R.id.chart);
 
@@ -149,7 +148,7 @@ public class StatsActivity extends ActionBarActivity {
         SliceValue sliceothers = new SliceValue(totalentries - (count9m + count9w2 + count9w6 + count9w8), ChartUtils.pickColor());
 
         float percent9m = (float) count9m / (float) totalentries;
-       // float percent9w = (float) count9w / (float) totalentries;
+        // float percent9w = (float) count9w / (float) totalentries;
         float percent9w2 = (float) count9w2 / (float) totalentries;
         float percent9w6 = (float) count9w6 / (float) totalentries;
         float percent9w8 = (float) count9w8 / (float) totalentries;
