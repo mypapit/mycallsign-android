@@ -1,7 +1,7 @@
 /*
  * This file is part of MYCallsign
  *
- * Copyright (c) 2015 Mohammad Hafiz bin Ismail <mypapit@gmail.com>
+ * Copyright (c) 2016 Mohammad Hafiz bin Ismail <mypapit@gmail.com>
  * MYCallsign is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
  * published by the Free Software Foundation, either version 3
@@ -16,12 +16,13 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * Last Modified 2/23/15 3:55 AM
+ * Last Modified 6/27/16 1:42 AM
  *  Info url :
+ *  https://github.com/mypapit/mycallsign-android
  *  http://code.google.com/p/mycallsign-android/
- *  http://blog.mypapit.net
+ *  https://blog.mypapit.net
  *  http://kirostudio.com
- *  http://mypapit.net
+ *
  */
 
 package net.mypapit.mobile.callsignview;
@@ -40,13 +41,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.DialogPreference;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatDialog;
 import android.support.v7.widget.SearchView;
-import android.transition.Slide;
-import android.transition.TransitionInflater;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -91,7 +89,7 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
 
     //please increment strDBVERSION when callsign.txt is updated
     public static final int strDBVERSION = 0x31;
-    public static final String CLIENT_VERSION ="MYCallsign/2.1.0";
+    public static final String CLIENT_VERSION = "MYCallsign/2.1.0";
     public static final String URL_API = "http://api.repeater.my/v1/callsign/endp.php";
     public static final String QUERY_API = "http://api.repeater.my/v1/callsign/getcount.php";
 
@@ -114,8 +112,7 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
         activity = this;
 
 
-
-       overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_scale);
+        overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_scale);
 
         SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
         mSearchHandle = prefs.getBoolean("mSearchHandle", false);
@@ -128,24 +125,19 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
         lv.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent passIntent = new Intent();
-                passIntent.setClassName("net.mypapit.mobile.callsignview", "net.mypapit.mobile.callsignview.CallsignDetailActivity");
-
+                Intent passIntent = new Intent(getApplicationContext(),CallsignDetailActivity.class);
                 Cursor cursor1 = (Cursor) lv.getItemAtPosition(position);
-
                 Callsign cs = new Callsign(cursor1.getString(cursor1.getColumnIndex("callsign")), cursor1.getString(cursor1.getColumnIndex("handle")));
                 cs.setAa(cursor1.getString(cursor1.getColumnIndex("aa")));
                 cs.setExpire(cursor1.getString(cursor1.getColumnIndex("expire")));
 
-                //cursor1.close();
-
                 OkHttpClient client = new OkHttpClient();
 
                 RequestBody formbody = new FormBody.Builder()
-                        .add("apiver","1")
-                        .add("callsign",cs.getCallsign())
-                        .add("device", Build.PRODUCT +" " + Build.MODEL)
-                        .add("client",CLIENT_VERSION)
+                        .add("apiver", "1")
+                        .add("callsign", cs.getCallsign())
+                        .add("device", Build.PRODUCT + " " + Build.MODEL)
+                        .add("client", CLIENT_VERSION)
                         .build();
                 Request request = new Request.Builder()
                         .url("http://api.repeater.my/v1/callsign/endp.php")
@@ -155,7 +147,7 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
                 client.newCall(request).enqueue(new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
-                        Log.d("OKHttp",e.getMessage());
+                        Log.d("OKHttp", e.getMessage());
                         e.printStackTrace();
                     }
 
@@ -171,7 +163,7 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
 
                 passIntent.putExtra("Callsign", cs);
 
-                startActivityForResult(passIntent, -1,options.toBundle());
+                startActivityForResult(passIntent, -1, options.toBundle());
 
 
             }
@@ -207,18 +199,13 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         Intent intent;
 
 
         switch (item.getItemId()) {
 
-            //noinspection SimplifiableIfStatement
+
             case R.id.action_filter:
-                //MaterialDialog dialog;
-                // MaterialDialogCompat.Builder dialogBuilder = new MaterialDialogCompat.Builder(this);
 
 
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
@@ -247,13 +234,8 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
                                 showToast("Search by Handle/Name ");
                                 editor.putBoolean("mSearchHandle", mSearchHandle);
                                 editor.apply();
-
                                 break;
-
-
                         }
-
-
                     }
                 });
 
@@ -262,22 +244,17 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
 
 
             case R.id.showMap:
-                //Snackbar.with(this).text("Map is not available yet").show(this);
                 intent = new Intent(getApplicationContext(), MapsActivity.class);
                 startActivity(intent);
-
-
                 break;
 
             case R.id.showFavorites:
-                intent = new Intent();
-                intent.setClassName("net.mypapit.mobile.callsignview", "net.mypapit.mobile.callsignview.FavoriteActivity");
+                intent = new Intent(this,FavoriteActivity.class);
                 startActivity(intent);
                 break;
 
             case R.id.showStats:
-                intent = new Intent();
-                intent.setClassName("net.mypapit.mobile.callsignview", "net.mypapit.mobile.callsignview.StatsActivity");
+                intent = new Intent(this,StatsActivity.class);
                 startActivity(intent);
                 break;
 
@@ -286,8 +263,6 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
                     showDialog();
                 } catch (PackageManager.NameNotFoundException ex) {
                     Snackbar.with(this).text(ex.toString()).show(this);
-
-
                 }
 
 
@@ -324,15 +299,10 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
         } else {
             cursor = this.searchCallsign(query);
         }
-            /*
-            adapter = new MyCursorAdapter(getApplicationContext(),
-                    R.layout.layout, cursor, new String[] {
-                    "callsign", "handle" }, new int[] {
-                    R.id.tvCallsignrow, R.id.tvHandlerow}, MyCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
-                    */
 
-        adapter = new MyCursorAdapter(this, cursor, placeData, 0);
-        lv.setAdapter(adapter);
+        adapter.swapCursor(cursor);
+        //  adapter = new MyCursorAdapter(this, cursor, placeData, 0);
+        //lv.setAdapter(adapter);
 
 
     }
@@ -340,8 +310,7 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
     private Cursor searchCallsign(String callsign) {
 
         String query = "SELECT * FROM aa WHERE callsign LIKE ? ORDER BY handle;";
-        //Cursor cursor = db.rawQuery(query, new String[]{"%" + callsign});
-        // Log.d("MYPAPIT.NET",callsign);
+
         Cursor cursor;
 
         if (callsign.startsWith("9")) {
@@ -354,9 +323,13 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
         }
 
 
-        if (cursor != null) {
-            cursor.moveToFirst();
+        if (cursor == null) {
+            return null;
+        } else if (!cursor.moveToFirst()) {
+            cursor.close();
+            return null;
         }
+
         return cursor;
 
     }
@@ -407,7 +380,7 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
 
     protected void onRestart() {
         super.onRestart();
-        adapter.notifyDataSetChanged();
+        // adapter.notifyDataSetChanged();
 
 
     }
@@ -432,8 +405,7 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
     }
 
 
-
-    public ProgressDialog progressDialog(){
+    public ProgressDialog progressDialog() {
 
         ProgressDialog dialog = new ProgressDialog(this);
         dialog.setMessage(getResources().getString(R.string.progress_dialog));
@@ -445,10 +417,7 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
         return dialog;
 
 
-
     }
-
-
 
 
     /**
@@ -457,14 +426,13 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
     private class MyCursorAdapter extends CursorAdapter implements SectionIndexer {
         private final int EXPIRE, CALLSIGN, HANDLE, FAVORITE;
         private final int colorfilter, colorfilter5years;
-        private LayoutInflater inflater;
         private final AlphabetIndexer mAlphabetIndexer;
-        private TextView tvCallsignRow, tvHandleRow;
-        private RoundedImageView roundView;
         private final DateFormat sdf;
         private final Date now;
         private final ConstantsInstaller pdata;
-
+        private LayoutInflater inflater;
+        private TextView tvCallsignRow, tvHandleRow;
+        private RoundedImageView roundView;
         private ViewHolder holder;
         //   Context context;
 
@@ -574,9 +542,8 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
 
     class LoadDatabaseTask extends AsyncTask<String, String, String> {
 
-       private  ProgressDialog dialog;
-
         private final MainActivity activity;
+        private ProgressDialog dialog;
 
         public LoadDatabaseTask(MainActivity activity) {
             this.activity = activity;
@@ -585,7 +552,7 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
 
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog=activity.progressDialog();
+            dialog = activity.progressDialog();
 
 
         }
@@ -613,7 +580,6 @@ public class MainActivity extends ActionBarActivity implements SearchView.OnQuer
 
         protected void onPostExecute(String test) {
             adapter = new MyCursorAdapter(activity, cursor, placeData, MyCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
-
             lv.setAdapter(adapter);
             lv.setFastScrollEnabled(true);
             lv.setVerticalFadingEdgeEnabled(false);

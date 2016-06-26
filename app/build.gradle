@@ -35,8 +35,8 @@ android {
         applicationId "net.mypapit.mobile.callsignview"
         minSdkVersion 16
         targetSdkVersion 21
-        versionCode 210
-        versionName "2.1.0"
+        versionCode 212
+        versionName "2.1.2"
     }
     buildTypes {
         release {
@@ -65,8 +65,8 @@ dependencies {
     compile 'com.google.code.gson:gson:2.4'
     compile 'com.squareup.okhttp3:okhttp:3.3.1'
     compile 'com.squareup.okio:okio:1.8.0'
-    compile 'com.google.android.gms:play-services-location:8.3.0'
-    compile 'com.google.android.gms:play-services-ads:8.3.0'
+    compile 'com.google.android.gms:play-services-location:8.4.0'
+    compile 'com.google.android.gms:play-services-ads:8.4.0'
     compile 'si.virag:fuzzydateformatter:1.1.0'
     compile 'com.android.support:support-v4:23.4.0'
 }

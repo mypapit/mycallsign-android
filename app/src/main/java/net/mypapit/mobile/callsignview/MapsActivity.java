@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * Last Modified 6/22/16 5:40 PM
+ * Last Modified 6/26/16 8:02 PM
  *  Info url :
  *  https://github.com/mypapit/mycallsign-android
  *  http://code.google.com/p/mycallsign-android/
@@ -57,6 +57,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -67,6 +68,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 import okhttp3.HttpUrl;
@@ -144,6 +146,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
         mMap.setMyLocationEnabled(true);
 
+        CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(new LatLng(3.15,101.72))
+                .zoom(7)
+                .build();
+
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
 
         mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
 
@@ -219,6 +228,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         if (mLastKnownLocation != null) {
             new MarkerRequest(mLastKnownLocation, this).execute();
+        } else {
+            Snackbar.with(this).text(getString(R.string.no_location)).show(this);
         }
 
     }
@@ -251,7 +262,16 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 e.printStackTrace();
             }
 
-            String timedistance = FuzzyDateTimeFormatter.getTimeAgo(getApplicationContext(), time);
+            Date date = new Date();
+            String timedistance;
+
+            if (date.after(time)) {
+
+                timedistance = FuzzyDateTimeFormatter.getTimeAgo(getApplicationContext(), time);
+            } else {
+                timedistance = getString(R.string.unknown);
+            }
+
 
             marking.position(callsign.getLatLng());
             marking.title(new StringBuilder(callsign.callsign).append(" - ")

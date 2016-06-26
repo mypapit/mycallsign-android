@@ -1,7 +1,8 @@
+
 /*
  * This file is part of MYCallsign
  *
- * Copyright (c) 2015 Mohammad Hafiz bin Ismail <mypapit@gmail.com>
+ * Copyright (c) 2016 Mohammad Hafiz bin Ismail <mypapit@gmail.com>
  * MYCallsign is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
  * published by the Free Software Foundation, either version 3
@@ -16,12 +17,13 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * Last Modified 6/20/15 1:43 PM
+ * Last Modified 6/25/16 2:48 AM
  *  Info url :
+ *  https://github.com/mypapit/mycallsign-android
  *  http://code.google.com/p/mycallsign-android/
- *  http://blog.mypapit.net
+ *  https://blog.mypapit.net
  *  http://kirostudio.com
- *  http://mypapit.net
+ *
  */
 
 package net.mypapit.mobile.callsignview;

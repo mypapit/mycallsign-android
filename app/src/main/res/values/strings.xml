@@ -52,6 +52,9 @@
     <string name="ad_unit_id" translatable="false">ca-app-pub-3163716613766876/2450451475</string>
     <string name="progress_dialog">Populating database</string>
     <string name="progress_title">Please wait&#8230;</string>
+    <string name="unknown">Unknown</string>
+    <string name="no_location">Unable to detect location :(</string>
+
 
 
 
