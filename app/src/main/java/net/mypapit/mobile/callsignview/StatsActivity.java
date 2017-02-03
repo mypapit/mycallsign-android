@@ -76,6 +76,8 @@ public class StatsActivity extends ActionBarActivity implements StatsFragment.On
         adapter.addFragment(new TopQueriedFragment(), "Top Queried");
         adapter.addFragment(new StatsFragment(), "Stats");
 
+
+
         viewPager.setAdapter(adapter);
     }
 
