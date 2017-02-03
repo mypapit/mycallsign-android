@@ -88,8 +88,8 @@ import okhttp3.Response;
 public class MainActivity extends ActionBarActivity implements SearchView.OnQueryTextListener {
 
     //please increment strDBVERSION when callsign.txt is updated
-    public static final int strDBVERSION = 0x31;
-    public static final String CLIENT_VERSION = "MYCallsign/2.1.0";
+    public static final int strDBVERSION = 0x34;
+    public static final String CLIENT_VERSION = "MYCallsign/2.1.3";
     public static final String URL_API = "http://api.repeater.my/v1/callsign/endp.php";
     public static final String QUERY_API = "http://api.repeater.my/v1/callsign/getcount.php";
 
