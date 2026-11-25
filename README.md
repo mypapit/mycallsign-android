@@ -6,7 +6,7 @@ MYCallsign is a native Android application for looking up Malaysian amateur radi
 
 MYCallsign 5.0 is built with Kotlin, Jetpack Compose, and Material 3 for Android 10 (API 29) through Android 17 (API 37), with no ads, no activity tracking, and strict on-device privacy.
 
-- **Callsign Directory & Sync**: Downloads the latest callsign directory from `https://api.mypapit.net/repeater/callsign.csv` on first launch (with a bundled offline snapshot fallback if unreachable), encourages weekly updates, and enforces a 12-hour update cooldown with HTTP conditional caching (`ETag` / `Last-Modified`).
+- **Callsign Directory & Sync**: Downloads the latest callsign directory from remote application server on first launch (with a bundled offline snapshot fallback if unreachable), encourages weekly updates, and enforces a 12-hour update cooldown with HTTP conditional caching (`ETag` / `Last-Modified`).
 - **Flexible Search & Filters**: Search by **Callsign**, wildcard **Name** (supports `*`, minimum 3 characters), or **Apparatus Assignment No.**, and filter results by license status (`Active`, `Expired`) or Malaysian callsign prefix (`9M2`, `9M4`, `9M6`, `9M8`, `9W2`, `9W6`, `9W8`).
 - **Callsign Details & Persistent Favorites**: View assignment holder details, Apparatus Assignment number, expiry date, and status badges (`ACTIVE`, `EXPIRED`, `EXPIRED >5Y`), copy or share details, and save Favorites that persist across database updates.
 - **Offline Statistics**: Inspect total, active, expired, and expiring-within-90-days counts, explore an interactive class distribution chart (`9M`, `9W2`, `9W6`, `9W8`, `Others`), and browse callsigns expired more than 5 years ago.
