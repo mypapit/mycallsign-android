@@ -4,12 +4,12 @@ MYCallsign is a native Android application for looking up Malaysian amateur radi
 
 ## Overview & Features
 
-MYCallsign 5.0 is built with Kotlin, Jetpack Compose, and Material 3 for Android 10 (API 29) through Android 17 (API 37), with no ads, no activity tracking, and strict on-device privacy.
+MYCallsign 5.0 is built for Android 10 (API 29) through Android 17 (API 37), with no ads, no activity tracking, and strict on-device privacy.
 
 - **Callsign Directory & Sync**: Downloads the latest callsign directory from remote application server on first launch (with a bundled offline snapshot fallback if unreachable), encourages weekly updates, and enforces a 12-hour update cooldown with HTTP conditional caching (`ETag` / `Last-Modified`).
-- **Flexible Search & Filters**: Search by **Callsign**, wildcard **Name** (supports `*`, minimum 3 characters), or **Apparatus Assignment No.**, and filter results by license status (`Active`, `Expired`) or Malaysian callsign prefix (`9M2`, `9M4`, `9M6`, `9M8`, `9W2`, `9W6`, `9W8`).
+- **Flexible Search & Filters**: Search by **Callsign**, wildcard **Name** (supports `*`, minimum 3 characters), or **Apparatus Assignment No.**, and filter results by license status (`Active`, `Expired`) or Malaysian callsign prefix (`9M2`, `9M4`, `9M6`, `9M8`, `9W2`, `9W3`, `9W4`, `9W6`, `9W8`).
 - **Callsign Details & Persistent Favorites**: View assignment holder details, Apparatus Assignment number, expiry date, and status badges (`ACTIVE`, `EXPIRED`, `EXPIRED >5Y`), copy or share details, and save Favorites that persist across database updates.
-- **Offline Statistics**: Inspect total, active, expired, and expiring-within-90-days counts, explore an interactive class distribution chart (`9M`, `9W2`, `9W6`, `9W8`, `Others`), and browse callsigns expired more than 5 years ago.
+- **Offline Statistics**: Inspect total, active, expired, and expiring-within-90-days counts, explore an interactive class distribution chart (`9M`, `9W2`, `9W6`, `9W8`, `9W3`, `9W4`, `Others`), and browse callsigns expired more than 5 years ago.
 - **Optional Live Malaysian APRS Map**: Opt-in MapLibre GeoJSON viewer fed by application server (refreshed every 30 minutes) over OpenFreeMap dark tiles, with station detail sheets and directory cross-lookup. Location detection is off by default, never requested at startup, stays strictly on-device, and can be disabled anytime.
 
 ## Screenshots
@@ -20,7 +20,7 @@ MYCallsign 5.0 is built with Kotlin, Jetpack Compose, and Material 3 for Android
 
 ## Credits
 
-- **Author**: Mohammad Hafiz bin Ismail (`mypapit@gmail.com`)
+- **Author**: Mohammad Hafiz bin Ismail (9W2WTF) (`mypapit@gmail.com`)
 - **Source Code**: [https://github.com/mypapit/mycallsign-android](https://github.com/mypapit/mycallsign-android)
 - **Facebook**: [https://fb.me/mycallsign](https://fb.me/mycallsign)
 - **Special Thanks**: `9W2SHB Mysaleh.net` for providing the callsign database.
@@ -33,7 +33,7 @@ MYCallsign 5.0 is built with Kotlin, Jetpack Compose, and Material 3 for Android
 
 ## License
 
-Copyright © 2015–2026 Mohammad Hafiz bin Ismail
+Copyright © 2015–2026 Mohammad Hafiz bin Ismail (9W2WTF)
 
 This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 

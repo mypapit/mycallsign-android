@@ -35,13 +35,16 @@ import net.mypapit.mobile.callsignview.ui.components.CallsignCard
 fun ExpiredCallsignsScreen(
     repository: CallsignRepository,
     onCallsignClick: (String) -> Unit,
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    selectedCallsign: String? = null,
+    modifier: Modifier = Modifier
 ) {
     val expired by repository.observeExpiredOver5Years()
         .collectAsStateWithLifecycle(initialValue = emptyList())
     val scope = rememberCoroutineScope()
 
     Scaffold(
+        modifier = modifier,
         topBar = {
             TopAppBar(
                 title = {
@@ -102,7 +105,8 @@ fun ExpiredCallsignsScreen(
                             scope.launch {
                                 repository.toggleFavorite(entry.item.callsign, entry.isFavorite)
                             }
-                        }
+                        },
+                        isSelected = entry.item.callsign == selectedCallsign
                     )
                 }
             }

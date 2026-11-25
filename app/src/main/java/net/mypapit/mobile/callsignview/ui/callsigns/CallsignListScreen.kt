@@ -68,7 +68,7 @@ import net.mypapit.mobile.callsignview.ui.theme.AmberWarning
 import net.mypapit.mobile.callsignview.ui.theme.OrangeAccent
 import net.mypapit.mobile.callsignview.ui.theme.OrangeContainer
 
-private val PREFIX_OPTIONS = listOf("ALL", "9M2", "9M4", "9M6", "9M8", "9W2", "9W6", "9W8")
+private val PREFIX_OPTIONS = listOf("ALL", "9M2", "9M4", "9M6", "9M8", "9W2", "9W3", "9W4", "9W6", "9W8")
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -77,6 +77,7 @@ fun CallsignListScreen(
     onCallsignClick: (String) -> Unit,
     onOpenSettings: () -> Unit,
     onOpenAbout: () -> Unit,
+    selectedCallsign: String? = null,
     modifier: Modifier = Modifier
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
@@ -244,7 +245,7 @@ fun CallsignListScreen(
                     },
                     placeholder = {
                         val hint = when (state.searchMode) {
-                            SearchMode.CALLSIGN -> "Search callsign (e.g. 9M2, 9W2…)"
+                            SearchMode.CALLSIGN -> "Search callsign (e.g. 9M2, 9W2, 9W3…)"
                             SearchMode.NAME -> "Search name (3+ chars, * wildcard)"
                             SearchMode.AA_NUMBER -> "Search Apparatus Assignment No."
                         }
@@ -388,7 +389,8 @@ fun CallsignListScreen(
                         CallsignCard(
                             entry = entry,
                             onClick = { onCallsignClick(entry.item.callsign) },
-                            onToggleFavorite = { viewModel.toggleFavorite(entry) }
+                            onToggleFavorite = { viewModel.toggleFavorite(entry) },
+                            isSelected = entry.item.callsign == selectedCallsign
                         )
                     }
                     item {

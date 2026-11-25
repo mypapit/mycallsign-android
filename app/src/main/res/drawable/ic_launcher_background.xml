@@ -1,13 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
+
+    <!-- Dark charcoal base -->
     <path
-        android:fillColor="#181A1F"
+        android:fillColor="#14161B"
         android:pathData="M0,0h108v108h-108z" />
+
+    <!-- Subtle 14 alternating Jalur Gemilang stripes -->
     <path
-        android:fillColor="#21252C"
-        android:pathData="M54,12 A42,42 0 1,1 53.99,12 Z" />
+        android:fillAlpha="0.24"
+        android:fillColor="#E53935"
+        android:pathData="M0,0h108v7.71h-108z M0,15.43h108v7.71h-108z M0,30.86h108v7.71h-108z M0,46.29h108v7.71h-108z M0,61.71h108v7.72h-108z M0,77.14h108v7.72h-108z M0,92.57h108v7.72h-108z" />
+    <path
+        android:fillAlpha="0.11"
+        android:fillColor="#E8EDF5"
+        android:pathData="M0,7.71h108v7.72h-108z M0,23.14h108v7.72h-108z M0,38.57h108v7.72h-108z M0,54h108v7.71h-108z M0,69.43h108v7.71h-108z M0,84.86h108v7.71h-108z M0,100.29h108v7.71h-108z" />
+
+    <!-- Subtle royal navy upper-left canton -->
+    <path
+        android:fillAlpha="0.58"
+        android:fillColor="#153E90"
+        android:pathData="M0,0h54v54h-54z" />
+
+    <!-- Subtle crescent & star hint inside canton safe zone -->
+    <path
+        android:fillAlpha="0.24"
+        android:fillColor="#F2F4F7"
+        android:pathData="M37.5,31.5 A6.5,6.5 0 1,0 37.5,43.5 A5.2,5.2 0 1,1 37.5,31.5 Z" />
+    <path
+        android:fillAlpha="0.24"
+        android:fillColor="#F2F4F7"
+        android:pathData="M43,34.5 L43.9,36.6 L46,37.5 L43.9,38.4 L43,40.5 L42.1,38.4 L40,37.5 L42.1,36.6 Z" />
+
+    <!-- Soft dark center vignette to keep antenna motif crisp -->
+    <path android:pathData="M0,0h108v108h-108z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:centerX="54"
+                android:centerY="54"
+                android:endColor="#0014161B"
+                android:gradientRadius="46"
+                android:startColor="#A814161B"
+                android:type="radial" />
+        </aapt:attr>
+    </path>
 </vector>

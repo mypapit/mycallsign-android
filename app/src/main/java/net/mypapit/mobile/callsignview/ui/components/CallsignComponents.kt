@@ -35,11 +35,18 @@ import net.mypapit.mobile.callsignview.ui.theme.AmberWarning
 import net.mypapit.mobile.callsignview.ui.theme.AmberWarningContainer
 import net.mypapit.mobile.callsignview.ui.theme.AppMotion
 import net.mypapit.mobile.callsignview.ui.theme.CallsignMonoStyle
+import net.mypapit.mobile.callsignview.ui.theme.ChartSkyBlue
+import net.mypapit.mobile.callsignview.ui.theme.ChartViolet
+import net.mypapit.mobile.callsignview.ui.theme.ClassCContainer
+import net.mypapit.mobile.callsignview.ui.theme.GatewayContainer
+import net.mypapit.mobile.callsignview.ui.theme.OnSteelContainer
 import net.mypapit.mobile.callsignview.ui.theme.OrangeAccent
+import net.mypapit.mobile.callsignview.ui.theme.OrangeContainer
 import net.mypapit.mobile.callsignview.ui.theme.RadioCyan
 import net.mypapit.mobile.callsignview.ui.theme.RadioCyanContainer
 import net.mypapit.mobile.callsignview.ui.theme.SignalRed
 import net.mypapit.mobile.callsignview.ui.theme.SignalRedContainer
+import net.mypapit.mobile.callsignview.ui.theme.SteelContainer
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
@@ -103,11 +110,57 @@ fun ExpiryStatusBadge(
     }
 }
 
+fun formatPrefixClassLabel(prefixGroup: String): String {
+    return when (prefixGroup) {
+        "9M2", "9M6", "9M8" -> "$prefixGroup • Class A"
+        "9M4" -> "9M4 • Club / Special"
+        "9W2", "9W6", "9W8" -> "$prefixGroup • Class B"
+        "9W3" -> "9W3 • Class C"
+        "9W4" -> "9W4 • Gateway / RoIP"
+        else -> prefixGroup
+    }
+}
+
+@Composable
+fun CallsignClassBadge(
+    prefixGroup: String,
+    modifier: Modifier = Modifier
+) {
+    val (label, containerColor, contentColor) = when (prefixGroup) {
+        "9M2", "9M6", "9M8" -> Triple("CLASS A", OrangeContainer, OrangeAccent)
+        "9M4" -> Triple("CLUB", SteelContainer, OnSteelContainer)
+        "9W2", "9W6", "9W8" -> Triple("CLASS B", RadioCyanContainer, RadioCyan)
+        "9W3" -> Triple("CLASS C", ClassCContainer, ChartViolet)
+        "9W4" -> Triple("GATEWAY", GatewayContainer, ChartSkyBlue)
+        else -> Triple(
+            prefixGroup,
+            MaterialTheme.colorScheme.surfaceContainerHighest,
+            MaterialTheme.colorScheme.onSurfaceVariant
+        )
+    }
+
+    Surface(
+        modifier = modifier,
+        color = containerColor,
+        shape = MaterialTheme.shapes.extraSmall,
+        border = BorderStroke(1.dp, contentColor.copy(alpha = 0.35f))
+    ) {
+        Text(
+            text = label,
+            style = MaterialTheme.typography.labelSmall,
+            fontWeight = FontWeight.Bold,
+            color = contentColor,
+            modifier = Modifier.padding(horizontal = 7.dp, vertical = 3.dp)
+        )
+    }
+}
+
 @Composable
 fun CallsignCard(
     entry: CallsignWithFavorite,
     onClick: () -> Unit,
     onToggleFavorite: () -> Unit,
+    isSelected: Boolean = false,
     modifier: Modifier = Modifier
 ) {
     val item = entry.item
@@ -122,9 +175,16 @@ fun CallsignCard(
         onClick = onClick,
         modifier = modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainer
+            containerColor = if (isSelected) {
+                OrangeContainer.copy(alpha = 0.35f)
+            } else {
+                MaterialTheme.colorScheme.surfaceContainer
+            }
         ),
-        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)
+        border = BorderStroke(
+            width = if (isSelected) 1.5.dp else 1.dp,
+            color = if (isSelected) OrangeAccent else MaterialTheme.colorScheme.outlineVariant
+        )
     ) {
         Row(
             modifier = Modifier
@@ -145,6 +205,7 @@ fun CallsignCard(
                         style = CallsignMonoStyle,
                         color = OrangeAccent
                     )
+                    CallsignClassBadge(prefixGroup = item.prefixGroup)
                     ExpiryStatusBadge(status = status)
                 }
 

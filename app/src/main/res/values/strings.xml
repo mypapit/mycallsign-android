@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MYCallsign</string>
-    <string name="copyright_notice">Copyright © 2015–2026 Mohammad Hafiz bin Ismail</string>
+    <string name="copyright_notice">Copyright © 2015–2026 Mohammad Hafiz bin Ismail (9W2WTF)</string>
     <string name="developer_email">mypapit@gmail.com</string>
     <string name="source_url">https://github.com/mypapit/mycallsign-android</string>
     <string name="facebook_url">https://fb.me/mycallsign</string>

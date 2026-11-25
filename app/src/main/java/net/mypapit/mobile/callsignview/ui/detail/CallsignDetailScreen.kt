@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -56,20 +57,40 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
 import net.mypapit.mobile.callsignview.data.repository.CallsignRepository
+import net.mypapit.mobile.callsignview.ui.components.CallsignClassBadge
 import net.mypapit.mobile.callsignview.ui.components.ExpiryStatus
 import net.mypapit.mobile.callsignview.ui.components.ExpiryStatusBadge
 import net.mypapit.mobile.callsignview.ui.components.buildShareText
 import net.mypapit.mobile.callsignview.ui.components.evaluateExpiryStatus
+import net.mypapit.mobile.callsignview.ui.components.formatPrefixClassLabel
 import net.mypapit.mobile.callsignview.ui.theme.AppMotion
 import net.mypapit.mobile.callsignview.ui.theme.CallsignMonoStyle
 import net.mypapit.mobile.callsignview.ui.theme.OrangeAccent
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CallsignDetailScreen(
     callsign: String,
     repository: CallsignRepository,
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    CallsignDetailPane(
+        callsign = callsign,
+        repository = repository,
+        showBackButton = true,
+        onBack = onBack,
+        modifier = modifier
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun CallsignDetailPane(
+    callsign: String,
+    repository: CallsignRepository,
+    showBackButton: Boolean,
+    onBack: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val entry by repository.observeByCallsign(callsign)
         .collectAsStateWithLifecycle(initialValue = null)
@@ -78,20 +99,32 @@ fun CallsignDetailScreen(
     val snackbarHostState = remember { SnackbarHostState() }
 
     Scaffold(
+        modifier = modifier.fillMaxSize(),
+        containerColor = if (showBackButton) {
+            MaterialTheme.colorScheme.background
+        } else {
+            MaterialTheme.colorScheme.surfaceContainerLowest
+        },
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         topBar = {
             TopAppBar(
                 title = { Text(callsign, style = CallsignMonoStyle) },
                 navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back"
-                        )
+                    if (showBackButton) {
+                        IconButton(onClick = onBack) {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                contentDescription = "Back"
+                            )
+                        }
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.background
+                    containerColor = if (showBackButton) {
+                        MaterialTheme.colorScheme.background
+                    } else {
+                        MaterialTheme.colorScheme.surfaceContainerLowest
+                    }
                 ),
                 actions = {
                     val current = entry
@@ -158,14 +191,20 @@ fun CallsignDetailScreen(
         val item = current.item
         val status = evaluateExpiryStatus(item.expiryDateIso)
 
-        Column(
+        Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(innerPadding)
-                .verticalScroll(rememberScrollState())
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+                .padding(innerPadding),
+            contentAlignment = Alignment.TopCenter
         ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .widthIn(max = 680.dp)
+                    .verticalScroll(rememberScrollState())
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(
@@ -187,7 +226,13 @@ fun CallsignDetailScreen(
                             style = CallsignMonoStyle.copy(fontSize = MaterialTheme.typography.displaySmall.fontSize),
                             color = OrangeAccent
                         )
-                        ExpiryStatusBadge(status = status)
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(6.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            CallsignClassBadge(prefixGroup = item.prefixGroup)
+                            ExpiryStatusBadge(status = status)
+                        }
                     }
 
                     Text(
@@ -248,7 +293,7 @@ fun CallsignDetailScreen(
                     DetailRow(
                         icon = Icons.Outlined.Radio,
                         label = "Prefix Class",
-                        value = item.prefixGroup
+                        value = formatPrefixClassLabel(item.prefixGroup)
                     )
                 }
             }
@@ -290,6 +335,7 @@ fun CallsignDetailScreen(
                     Text(" Share", modifier = Modifier.padding(start = 4.dp))
                 }
             }
+        }
         }
     }
 }

@@ -190,7 +190,7 @@ class CallsignRepository(
                     SyncResult.Updated(entities.size)
                 }
             } catch (e: Exception) {
-                SyncResult.Error(e.message ?: "Unable to reach api.mypapit.net")
+                SyncResult.Error(e.message ?: "Unable to reach application server")
             }
         }
 

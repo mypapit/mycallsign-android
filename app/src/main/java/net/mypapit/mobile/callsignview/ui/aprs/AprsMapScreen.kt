@@ -448,7 +448,7 @@ fun AprsMapScreen(
             title = { Text("APRS Viewer & Privacy") },
             text = {
                 Text(
-                    "• This APRS map is completely optional and refreshes live GeoJSON stations from api.mypapit.net every 30 minutes.\n" +
+                    "• This APRS map is completely optional and refreshes live GeoJSON stations from the application server every 30 minutes.\n" +
                         "• Location detection is off by default and never transmitted anywhere.\n" +
                         "• You can disable location detection or hide the APRS Map tab anytime in Settings."
                 )

@@ -25,6 +25,8 @@ data class CallsignStats(
     val expiredOver5Years: Int = 0,
     val count9M: Int = 0,
     val count9W2: Int = 0,
+    val count9W3: Int = 0,
+    val count9W4: Int = 0,
     val count9W6: Int = 0,
     val count9W8: Int = 0,
     val countOthers: Int = 0
@@ -194,6 +196,8 @@ interface CallsignDao {
             COALESCE(SUM(CASE WHEN expiryDateIso != '' AND expiryDateIso < :fiveYearsAgoIso THEN 1 ELSE 0 END), 0) AS expiredOver5Years,
             COALESCE(SUM(CASE WHEN prefixGroup IN ('9M2', '9M4', '9M6', '9M8') THEN 1 ELSE 0 END), 0) AS count9M,
             COALESCE(SUM(CASE WHEN prefixGroup = '9W2' THEN 1 ELSE 0 END), 0) AS count9W2,
+            COALESCE(SUM(CASE WHEN prefixGroup = '9W3' THEN 1 ELSE 0 END), 0) AS count9W3,
+            COALESCE(SUM(CASE WHEN prefixGroup = '9W4' THEN 1 ELSE 0 END), 0) AS count9W4,
             COALESCE(SUM(CASE WHEN prefixGroup = '9W6' THEN 1 ELSE 0 END), 0) AS count9W6,
             COALESCE(SUM(CASE WHEN prefixGroup = '9W8' THEN 1 ELSE 0 END), 0) AS count9W8,
             COALESCE(SUM(CASE WHEN prefixGroup = 'OTHER' THEN 1 ELSE 0 END), 0) AS countOthers

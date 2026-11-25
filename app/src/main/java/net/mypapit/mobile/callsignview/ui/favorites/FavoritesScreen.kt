@@ -41,6 +41,7 @@ import net.mypapit.mobile.callsignview.ui.theme.OrangeAccent
 fun FavoritesScreen(
     repository: CallsignRepository,
     onCallsignClick: (String) -> Unit,
+    selectedCallsign: String? = null,
     modifier: Modifier = Modifier
 ) {
     val favorites by repository.observeFavorites()
@@ -128,7 +129,8 @@ fun FavoritesScreen(
                                     repository.setFavorite(callsign, true)
                                 }
                             }
-                        }
+                        },
+                        isSelected = entry.item.callsign == selectedCallsign
                     )
                 }
             }

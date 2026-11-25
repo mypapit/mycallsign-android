@@ -4,25 +4,44 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <!-- Outer radio arcs -->
+
+    <!-- Subtle dark backing strokes for crisp separation over flag stripes -->
     <path
-        android:pathData="M31.5,38.5 A26,26 0 0,1 76.5,38.5"
-        android:strokeWidth="4.2"
+        android:pathData="M38.80,26.80 A21.5,21.5 0 0,0 38.80,57.20 M69.20,26.80 A21.5,21.5 0 0,1 69.20,57.20 M45.16,33.16 A12.5,12.5 0 0,0 45.16,50.84 M62.84,33.16 A12.5,12.5 0 0,1 62.84,50.84"
+        android:strokeWidth="6.4"
+        android:strokeColor="#99101216"
+        android:strokeLineCap="round" />
+    <path
+        android:pathData="M54,47 L54,79 M41,79 L54,47 L67,79 M47.5,63 L60.5,63 M43.8,72 L64.2,72"
+        android:strokeWidth="6.4"
+        android:strokeColor="#99101216"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+
+    <!-- Outer symmetrical radio wave arcs -->
+    <path
+        android:pathData="M38.80,26.80 A21.5,21.5 0 0,0 38.80,57.20 M69.20,26.80 A21.5,21.5 0 0,1 69.20,57.20"
+        android:strokeWidth="3.8"
         android:strokeColor="#FF6D00"
         android:strokeLineCap="round" />
+
+    <!-- Inner symmetrical radio wave arcs -->
     <path
-        android:pathData="M38.5,45.5 A17,17 0 0,1 69.5,45.5"
-        android:strokeWidth="4.2"
+        android:pathData="M45.16,33.16 A12.5,12.5 0 0,0 45.16,50.84 M62.84,33.16 A12.5,12.5 0 0,1 62.84,50.84"
+        android:strokeWidth="3.8"
         android:strokeColor="#FF9E40"
         android:strokeLineCap="round" />
-    <!-- Antenna mast & beacon -->
+
+    <!-- Lattice antenna tower & cross-braces -->
     <path
-        android:fillColor="#FF6D00"
-        android:pathData="M54,48 A5,5 0 1,1 53.99,48 Z" />
-    <path
-        android:pathData="M54,53 L54,79 M42,79 L54,57 L66,79 M46,71 L62,71"
-        android:strokeWidth="4.5"
+        android:pathData="M54,47 L54,79 M41,79 L54,47 L67,79 M47.5,63 L60.5,63 M43.8,72 L64.2,72"
+        android:strokeWidth="3.8"
         android:strokeColor="#F2F4F7"
         android:strokeLineCap="round"
         android:strokeLineJoin="round" />
+
+    <!-- Glowing orange antenna beacon -->
+    <path
+        android:fillColor="#FF6D00"
+        android:pathData="M54,37.2 A4.8,4.8 0 1,1 53.99,37.2 Z" />
 </vector>

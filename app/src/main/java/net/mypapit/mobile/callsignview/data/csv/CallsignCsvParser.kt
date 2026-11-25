@@ -156,6 +156,8 @@ object CallsignCsvParser {
             upper.startsWith("9M6") -> "9M6"
             upper.startsWith("9M8") -> "9M8"
             upper.startsWith("9W2") -> "9W2"
+            upper.startsWith("9W3") -> "9W3"
+            upper.startsWith("9W4") -> "9W4"
             upper.startsWith("9W6") -> "9W6"
             upper.startsWith("9W8") -> "9W8"
             else -> "OTHER"

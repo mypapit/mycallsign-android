@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
@@ -55,6 +56,8 @@ import net.mypapit.mobile.callsignview.ui.theme.AppMotion
 import net.mypapit.mobile.callsignview.ui.theme.ChartCoolSlate
 import net.mypapit.mobile.callsignview.ui.theme.ChartIndigo
 import net.mypapit.mobile.callsignview.ui.theme.ChartLightOrange
+import net.mypapit.mobile.callsignview.ui.theme.ChartSkyBlue
+import net.mypapit.mobile.callsignview.ui.theme.ChartViolet
 import net.mypapit.mobile.callsignview.ui.theme.OrangeAccent
 import net.mypapit.mobile.callsignview.ui.theme.RadioCyan
 import net.mypapit.mobile.callsignview.ui.theme.SignalRed
@@ -95,6 +98,8 @@ fun StatsScreen(
             PrefixSlice("9W2", stats.count9W2, RadioCyan),
             PrefixSlice("9W6", stats.count9W6, ChartIndigo),
             PrefixSlice("9W8", stats.count9W8, ChartLightOrange),
+            PrefixSlice("9W3 (Class C)", stats.count9W3, ChartViolet),
+            PrefixSlice("9W4 (Gateway)", stats.count9W4, ChartSkyBlue),
             PrefixSlice("Others", stats.countOthers, ChartCoolSlate)
         ).filter { it.count > 0 }
     }
@@ -123,14 +128,20 @@ fun StatsScreen(
             )
         }
     ) { innerPadding ->
-        Column(
+        Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(innerPadding)
-                .verticalScroll(rememberScrollState())
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(14.dp)
+                .padding(innerPadding),
+            contentAlignment = Alignment.TopCenter
         ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .widthIn(max = 880.dp)
+                    .verticalScroll(rememberScrollState())
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(14.dp)
+            ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
@@ -317,6 +328,7 @@ fun StatsScreen(
             }
 
             Spacer(modifier = Modifier.height(8.dp))
+        }
         }
     }
 }

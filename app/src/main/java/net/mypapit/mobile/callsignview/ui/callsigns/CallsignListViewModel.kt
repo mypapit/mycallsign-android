@@ -151,7 +151,7 @@ class CallsignListViewModel(
         viewModelScope.launch {
             when (val result = repository.syncDatabase()) {
                 is SyncResult.Updated ->
-                    _events.emit("Updated ${result.count} callsigns from api.mypapit.net")
+                    _events.emit("Updated ${result.count} callsigns from application server")
                 SyncResult.UpToDate ->
                     _events.emit("Callsign database is already up to date")
                 is SyncResult.CooldownActive ->
