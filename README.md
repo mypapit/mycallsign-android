@@ -10,7 +10,7 @@ MYCallsign 5.0 is built with Kotlin, Jetpack Compose, and Material 3 for Android
 - **Flexible Search & Filters**: Search by **Callsign**, wildcard **Name** (supports `*`, minimum 3 characters), or **Apparatus Assignment No.**, and filter results by license status (`Active`, `Expired`) or Malaysian callsign prefix (`9M2`, `9M4`, `9M6`, `9M8`, `9W2`, `9W6`, `9W8`).
 - **Callsign Details & Persistent Favorites**: View assignment holder details, Apparatus Assignment number, expiry date, and status badges (`ACTIVE`, `EXPIRED`, `EXPIRED >5Y`), copy or share details, and save Favorites that persist across database updates.
 - **Offline Statistics**: Inspect total, active, expired, and expiring-within-90-days counts, explore an interactive class distribution chart (`9M`, `9W2`, `9W6`, `9W8`, `Others`), and browse callsigns expired more than 5 years ago.
-- **Optional Live Malaysian APRS Map**: Opt-in MapLibre GeoJSON viewer fed by `https://api.mypapit.net/repeater/stations.json` (refreshed every 30 minutes) over OpenFreeMap dark tiles, with station detail sheets and directory cross-lookup. Location detection is off by default, never requested at startup, stays strictly on-device, and can be disabled anytime.
+- **Optional Live Malaysian APRS Map**: Opt-in MapLibre GeoJSON viewer fed by application server (refreshed every 30 minutes) over OpenFreeMap dark tiles, with station detail sheets and directory cross-lookup. Location detection is off by default, never requested at startup, stays strictly on-device, and can be disabled anytime.
 
 ## Screenshots
 
