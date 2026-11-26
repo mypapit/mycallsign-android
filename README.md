@@ -24,6 +24,7 @@ MYCallsign 5.0 is built for Android 10 (API 29) through Android 17 (API 37), wit
 - **Source Code**: [https://github.com/mypapit/mycallsign-android](https://github.com/mypapit/mycallsign-android)
 - **Facebook**: [https://fb.me/mycallsign](https://fb.me/mycallsign)
 - **Special Thanks**: `9W2SHB Mysaleh.net` for providing the callsign database.
+- **Companion App — Repeater.my**: Looking for Malaysian amateur radio repeaters, frequencies, and coverage? Download [Repeater.my on Google Play](https://play.google.com/store/apps/details?id=net.mypapit.mobile.myrepeater).
 - **Open-Source Libraries & Map Data**:
   - AndroidX, Jetpack Compose, Room, and DataStore (Apache License 2.0)
   - OkHttp and Kotlinx Serialization (Apache License 2.0)

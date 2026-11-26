@@ -9,4 +9,8 @@
     <string name="gpl_license_summary">This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.\n\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</string>
     <string name="gpl_url">https://www.gnu.org/licenses/gpl-3.0.html</string>
     <string name="mcmc_disclaimer">This application is not created nor endorsed by Malaysian Communications &amp; Multimedia Commission (MCMC).</string>
+    <string name="repeater_companion_title">Companion App: Repeater.my</string>
+    <string name="repeater_companion_desc">Looking for Malaysian amateur radio repeaters, frequencies, tones, and nearby coverage? Download our companion app, Repeater.my, on Google Play.</string>
+    <string name="repeater_companion_cta">Get Repeater.my on Google Play</string>
+    <string name="repeater_companion_url">https://play.google.com/store/apps/details?id=net.mypapit.mobile.myrepeater</string>
 </resources>
