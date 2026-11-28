@@ -67,6 +67,7 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import net.mypapit.mobile.callsignview.data.model.AprsStation
+import net.mypapit.mobile.callsignview.ui.components.CompactTopAppBarHeight
 import net.mypapit.mobile.callsignview.ui.components.formatTimestamp
 import net.mypapit.mobile.callsignview.ui.theme.CallsignMonoStyle
 import net.mypapit.mobile.callsignview.ui.theme.OrangeAccent
@@ -192,6 +193,7 @@ fun AprsMapScreen(
         modifier = modifier.fillMaxSize(),
         topBar = {
             TopAppBar(
+                expandedHeight = CompactTopAppBarHeight,
                 title = {
                     Column {
                         Text(

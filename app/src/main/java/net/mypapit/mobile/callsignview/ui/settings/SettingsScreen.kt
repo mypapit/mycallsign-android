@@ -53,6 +53,7 @@ import net.mypapit.mobile.callsignview.data.prefs.UserPreferences
 import net.mypapit.mobile.callsignview.data.repository.CallsignRepository
 import net.mypapit.mobile.callsignview.data.repository.SyncCooldownPolicy
 import net.mypapit.mobile.callsignview.data.repository.SyncResult
+import net.mypapit.mobile.callsignview.ui.components.CompactTopAppBarHeight
 import net.mypapit.mobile.callsignview.ui.components.formatDurationBrief
 import net.mypapit.mobile.callsignview.ui.components.formatTimestamp
 import net.mypapit.mobile.callsignview.ui.theme.OrangeAccent
@@ -82,6 +83,7 @@ fun SettingsScreen(
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         topBar = {
             TopAppBar(
+                expandedHeight = CompactTopAppBarHeight,
                 title = {
                     Text(
                         text = "Settings",

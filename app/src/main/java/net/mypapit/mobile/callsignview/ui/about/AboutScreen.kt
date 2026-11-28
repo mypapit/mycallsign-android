@@ -43,6 +43,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import net.mypapit.mobile.callsignview.BuildConfig
 import net.mypapit.mobile.callsignview.R
+import net.mypapit.mobile.callsignview.ui.components.CompactTopAppBarHeight
 import net.mypapit.mobile.callsignview.ui.theme.OrangeAccent
 import net.mypapit.mobile.callsignview.ui.theme.OrangeContainer
 
@@ -62,6 +63,7 @@ fun AboutScreen(
     Scaffold(
         topBar = {
             TopAppBar(
+                expandedHeight = CompactTopAppBarHeight,
                 title = {
                     Text(
                         text = "About & Credits",

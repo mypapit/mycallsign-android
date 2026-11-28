@@ -64,6 +64,7 @@ import net.mypapit.mobile.callsignview.data.local.SearchMode
 import net.mypapit.mobile.callsignview.data.local.StatusFilter
 import net.mypapit.mobile.callsignview.data.prefs.DbSource
 import net.mypapit.mobile.callsignview.ui.components.CallsignCard
+import net.mypapit.mobile.callsignview.ui.components.CompactTopAppBarHeight
 import net.mypapit.mobile.callsignview.ui.theme.AmberWarning
 import net.mypapit.mobile.callsignview.ui.theme.OrangeAccent
 import net.mypapit.mobile.callsignview.ui.theme.OrangeContainer
@@ -94,6 +95,7 @@ fun CallsignListScreen(
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         topBar = {
             TopAppBar(
+                expandedHeight = CompactTopAppBarHeight,
                 title = {
                     Column {
                         Text(
@@ -211,7 +213,7 @@ fun CallsignListScreen(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 8.dp),
+                    .padding(start = 16.dp, end = 16.dp, top = 4.dp, bottom = 8.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 OutlinedTextField(

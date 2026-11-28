@@ -60,6 +60,8 @@ enum class ExpiryStatus {
     UNKNOWN
 }
 
+val CompactTopAppBarHeight = 56.dp
+
 fun evaluateExpiryStatus(
     expiryDateIso: String,
     today: LocalDate = LocalDate.now()

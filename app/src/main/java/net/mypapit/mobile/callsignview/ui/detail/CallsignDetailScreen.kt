@@ -58,6 +58,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
 import net.mypapit.mobile.callsignview.data.repository.CallsignRepository
 import net.mypapit.mobile.callsignview.ui.components.CallsignClassBadge
+import net.mypapit.mobile.callsignview.ui.components.CompactTopAppBarHeight
 import net.mypapit.mobile.callsignview.ui.components.ExpiryStatus
 import net.mypapit.mobile.callsignview.ui.components.ExpiryStatusBadge
 import net.mypapit.mobile.callsignview.ui.components.buildShareText
@@ -108,6 +109,7 @@ fun CallsignDetailPane(
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         topBar = {
             TopAppBar(
+                expandedHeight = CompactTopAppBarHeight,
                 title = { Text(callsign, style = CallsignMonoStyle) },
                 navigationIcon = {
                     if (showBackButton) {

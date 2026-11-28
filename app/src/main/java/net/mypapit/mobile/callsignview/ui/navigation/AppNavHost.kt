@@ -10,10 +10,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BarChart
 import androidx.compose.material.icons.filled.Map
@@ -178,7 +180,7 @@ fun MYCallsignApp(container: AppContainer) {
                         modifier = Modifier.fillMaxHeight(),
                         containerColor = MaterialTheme.colorScheme.surfaceContainerLow
                     ) {
-                        Spacer(modifier = Modifier.statusBarsPadding().padding(top = 12.dp))
+                        Spacer(modifier = Modifier.height(12.dp))
                         tabs.forEach { tab ->
                             val selected = currentDestination?.hierarchy?.any { it.route == tab.route } == true
                             NavigationRailItem(
@@ -222,6 +224,7 @@ fun MYCallsignApp(container: AppContainer) {
         } else {
             Scaffold(
                 containerColor = MaterialTheme.colorScheme.background,
+                contentWindowInsets = WindowInsets(0, 0, 0, 0),
                 bottomBar = {
                     if (showTopLevelChrome) {
                         NavigationBar(
@@ -264,7 +267,9 @@ fun MYCallsignApp(container: AppContainer) {
                     onSelectExpired = { expiredSelected = it },
                     onNavigateTab = ::navigateToTab,
                     onReplayOnboarding = { replayOnboarding = true },
-                    modifier = Modifier.padding(innerPadding)
+                    modifier = Modifier
+                        .padding(innerPadding)
+                        .consumeWindowInsets(innerPadding)
                 )
             }
         }

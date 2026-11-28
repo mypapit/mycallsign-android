@@ -51,6 +51,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import net.mypapit.mobile.callsignview.data.local.CallsignStats
 import net.mypapit.mobile.callsignview.data.repository.CallsignRepository
+import net.mypapit.mobile.callsignview.ui.components.CompactTopAppBarHeight
 import net.mypapit.mobile.callsignview.ui.theme.AmberWarning
 import net.mypapit.mobile.callsignview.ui.theme.AppMotion
 import net.mypapit.mobile.callsignview.ui.theme.ChartCoolSlate
@@ -108,6 +109,7 @@ fun StatsScreen(
         modifier = modifier.fillMaxSize(),
         topBar = {
             TopAppBar(
+                expandedHeight = CompactTopAppBarHeight,
                 title = {
                     Column {
                         Text(

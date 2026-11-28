@@ -34,6 +34,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
 import net.mypapit.mobile.callsignview.data.repository.CallsignRepository
 import net.mypapit.mobile.callsignview.ui.components.CallsignCard
+import net.mypapit.mobile.callsignview.ui.components.CompactTopAppBarHeight
 import net.mypapit.mobile.callsignview.ui.theme.OrangeAccent
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -54,6 +55,7 @@ fun FavoritesScreen(
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         topBar = {
             TopAppBar(
+                expandedHeight = CompactTopAppBarHeight,
                 title = {
                     Column {
                         Text(

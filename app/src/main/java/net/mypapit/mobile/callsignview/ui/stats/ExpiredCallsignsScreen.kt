@@ -29,6 +29,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
 import net.mypapit.mobile.callsignview.data.repository.CallsignRepository
 import net.mypapit.mobile.callsignview.ui.components.CallsignCard
+import net.mypapit.mobile.callsignview.ui.components.CompactTopAppBarHeight
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -47,6 +48,7 @@ fun ExpiredCallsignsScreen(
         modifier = modifier,
         topBar = {
             TopAppBar(
+                expandedHeight = CompactTopAppBarHeight,
                 title = {
                     Column {
                         Text(
